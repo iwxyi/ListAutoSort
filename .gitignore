@@ -28,4 +28,4 @@ Thumbs.db
 .navigation/
 proguard/
 .vs/
-.VC.db
+*.VC.db
