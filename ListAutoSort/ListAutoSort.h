@@ -7,6 +7,9 @@
 #include <QDebug>
 #include <QMessageBox>
 #include <QStringList>
+#include <QMenu>
+#include <QPoint>
+#include <QAction>
 #include "TitleItem.h"
 #include "FileUtil.h"
 #include "Global.h"
@@ -33,6 +36,8 @@ public slots :
 	void slotAddCol();
 	void slotInputButtonClicked();
 	void slotPasteButtonClicked();
+	void slotListItemMenu(QPoint p);
+	void slotDeleteListItem();
 
 signals:
 

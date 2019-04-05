@@ -16,6 +16,7 @@ void ListAutoSort::initView()
 	connect(ui.addCol, SIGNAL(clicked()), this, SLOT(slotAddCol()));
 	connect(ui.inputButton, SIGNAL(clicked()), this, SLOT(slotInputButtonClicked()));
 	connect(ui.pasteButton, SIGNAL(clicked()), this, SLOT(slotPasteButtonClicked()));
+	connect(ui.titileList, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(slotListItemMenu(QPoint)));
 }
 
 /**
@@ -31,7 +32,7 @@ void ListAutoSort::initTable()
  */
 void ListAutoSort::smartAddInfo(QString str)
 {
-
+	QMessageBox::information(this, QStringLiteral("分析"), str);
 }
 
 /*
@@ -75,7 +76,12 @@ void ListAutoSort::writeInfoTitles()
  */
 void ListAutoSort::refreshList()
 {
+	ui.titileList->clear();
 
+	for (int i = 0; i < titles.size(); i++)
+	{
+		QListWidgetItem* item = new QListWidgetItem(titles[i].getName(), ui.titileList);
+	}
 }
 
 /**
@@ -83,7 +89,8 @@ void ListAutoSort::refreshList()
  */
 void ListAutoSort::slotAddCol()
 {
-
+	QListWidgetItem* item = new QListWidgetItem(QStringLiteral("新字段"), ui.titileList);
+	titles.append(TitleItem(QStringLiteral("新字段"), ""));
 }
 
 /**
@@ -103,4 +110,31 @@ void ListAutoSort::slotPasteButtonClicked()
 	const QClipboard* clipboard = QApplication::clipboard();
 	QString str = clipboard->text();
 	smartAddInfo(str);
+}
+
+void ListAutoSort::slotListItemMenu(QPoint p)
+{
+	QListWidgetItem* item = ui.titileList->itemAt(p);
+	if (item == NULL)
+		return;
+
+	QMenu* menu = new QMenu(this);
+	QAction* deleteAction = new QAction(QStringLiteral("删除"), this);
+	menu->addAction(deleteAction);
+	connect(deleteAction, SIGNAL(triggered()), this, SLOT(slotDeleteListItem()));
+	menu->exec(QCursor::pos());
+}
+
+void ListAutoSort::slotDeleteListItem()
+{
+	QListWidgetItem* item = ui.titileList->currentItem();
+	if (item == NULL)
+		return;
+
+	int index = ui.titileList->currentIndex().row();
+	if (index >= 0 && index < titles.size())
+		titles.removeAt(index);
+
+	ui.titileList->takeItem(index); // 不知道为什么removeWidgetItem无效
+	delete item; // takeItem 需要手动 delete
 }

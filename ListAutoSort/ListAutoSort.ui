@@ -82,6 +82,9 @@
       <height>201</height>
      </rect>
     </property>
+    <property name="contextMenuPolicy">
+     <enum>Qt::CustomContextMenu</enum>
+    </property>
    </widget>
    <widget class="QLineEdit" name="patternEdit">
     <property name="geometry">
