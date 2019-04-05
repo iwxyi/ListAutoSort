@@ -36,6 +36,12 @@
     <ClCompile Include="ListAutoSort.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="InfoItem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="StringUtil.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="ListAutoSort.h">
@@ -51,5 +57,13 @@
     <QtRcc Include="ListAutoSort.qrc">
       <Filter>Resource Files</Filter>
     </QtRcc>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="InfoItem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StringUtil.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
