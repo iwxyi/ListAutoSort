@@ -17,7 +17,6 @@ public:
     void loadFromFile();
 
 public:
-
     bool is_debug;                   // µ÷ÊÔÄ£Ê½
 
 };

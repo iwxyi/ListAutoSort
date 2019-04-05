@@ -6,7 +6,7 @@
 #define GLOBALVAR_H
 
 #include <QCoreApplication>
-#include "settings.h"
+#include "usettings.h"
 #include "runtimeinfo.h"
 
 // ==== ”¶”√ ====
