@@ -31,7 +31,7 @@ private:
 
 	void readInfoTitles();
 	void writeInfoTitles();
-	void refreshList();
+	void refreshInfoTitiles();
 
 public slots :
 	void slotAddCol();

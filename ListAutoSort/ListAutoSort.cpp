@@ -4,6 +4,10 @@ ListAutoSort::ListAutoSort(QWidget *parent)
 	: QMainWindow(parent)
 {
 	ui.setupUi(this);
+
+	rt = new RuntimeInfo();
+	us = new USettings(rt->DATA_PATH+"settings.ini");
+
 	initView();
 	initTable();
 	readInfoTitles();
@@ -58,6 +62,7 @@ void ListAutoSort::writeInfoTitles()
 	}
 
 	writeTextFile(savedPath, content);
+	//QMessageBox::information(this, "qwe", content);
 }
 
 /**
@@ -65,8 +70,16 @@ void ListAutoSort::writeInfoTitles()
  */
 void ListAutoSort::readInfoTitles()
 {
-	QString savedPath = rt->DATA_PATH + "titles.txt";
+	QString savedPath = rt->DATA_PATH+"titles.txt";
+	if (!isFileExist(savedPath))
+		return;
 	QString content = readTextFile(savedPath);
+	{
+		QFile file(savedPath);
+		qint64 size = file.size();
+		QMessageBox::information(this, "content", QString("%1--%2").arg(size).arg(content));
+	}
+	//QMessageBox::information(this, "content", content);
 	QStringList ts = getXmls(content, "titles");
 
 	for (int i = 0; i < ts.size(); i++)
@@ -75,12 +88,14 @@ void ListAutoSort::readInfoTitles()
 		QString p = getXml(ts[i], "pattern");
 		titles.append(TitleItem(n, p));
 	}
+
+	refreshInfoTitiles();
 }
 
 /**
  * 做了更改之后刷新列表
  */
-void ListAutoSort::refreshList()
+void ListAutoSort::refreshInfoTitiles()
 {
 	ui.titileList->clear();
 
