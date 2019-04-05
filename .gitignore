@@ -29,3 +29,4 @@ Thumbs.db
 proguard/
 .vs/
 *.VC.db
+*.vs10x
