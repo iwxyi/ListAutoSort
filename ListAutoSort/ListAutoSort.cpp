@@ -6,6 +6,7 @@ ListAutoSort::ListAutoSort(QWidget *parent)
 	ui.setupUi(this);
 	initView();
 	initTable();
+	readInfoTitles();
 }
 
 /**
@@ -43,7 +44,7 @@ void ListAutoSort::smartAddInfo(QString str)
 /*
  * 从保存的文件中读取
  */
-void ListAutoSort::readInfoTitles()
+void ListAutoSort::writeInfoTitles()
 {
 	QString savedPath = rt->DATA_PATH+"titles.txt";
 	QString content;
@@ -62,7 +63,7 @@ void ListAutoSort::readInfoTitles()
 /**
  * 保存到文件之中
  */
-void ListAutoSort::writeInfoTitles()
+void ListAutoSort::readInfoTitles()
 {
 	QString savedPath = rt->DATA_PATH + "titles.txt";
 	QString content = readTextFile(savedPath);
@@ -98,6 +99,7 @@ void ListAutoSort::slotAddCol()
 	QListWidgetItem* item = new QListWidgetItem(QStringLiteral("新字段"), ui.titileList);
 	item->setFlags(item->flags() | Qt::ItemIsEditable);
 	titles.append(TitleItem(QStringLiteral("新字段"), ""));
+	writeInfoTitles();
 }
 
 /**
@@ -144,6 +146,7 @@ void ListAutoSort::slotDeleteListItem()
 
 	ui.titileList->takeItem(index); // 不知道为什么removeWidgetItem无效
 	delete item; // takeItem 需要手动 delete
+	writeInfoTitles();
 }
 
 void ListAutoSort::slotTitleItemTextModified(int row, QString text)
@@ -154,5 +157,5 @@ void ListAutoSort::slotTitleItemTextModified(int row, QString text)
 		return;
 
 	titles[row].setName(text);
-	QMessageBox::information(this, "qwe", text);
+	writeInfoTitles();
 }
