@@ -2,24 +2,24 @@
 #include <QList>
 #include "StringUtil.h"
 
-class TitleItem
+class InfoItem
 {
 public:
-	TitleItem()
+	InfoItem()
 	{
-		name = "";
+		title = "";
 		pattern = "";
 	}
 
-	TitleItem(QString n, QString p)
+	InfoItem(QString n, QString p)
 	{
-		name = n;
+		title = n;
 		pattern = p;
 	}
 
 	void setName(QString n)
 	{
-		name = n;
+		title = n;
 	}
 
 	void setPattern(QString p)
@@ -30,22 +30,12 @@ public:
 			p = p + "$";
 	}
 
-	QString getName()
-	{
-		return name;
-	}
-
-	QString getPattern()
-	{
-		return pattern;
-	}
-
 	bool isMatch()
 	{
-		return canRegExp(name, pattern);
+		return canRegExp(title, pattern);
 	}
 
-private:
-	QString name;
+public:
+	QString title;
 	QString pattern;
 };
