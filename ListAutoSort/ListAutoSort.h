@@ -7,7 +7,7 @@
 #include <QDebug>
 #include <QMessageBox>
 #include <QStringList>
-#include "InfoItem.h"
+#include "TitleItem.h"
 #include "FileUtil.h"
 #include "Global.h"
 #include "StringUtil.h"
@@ -39,5 +39,5 @@ signals:
 private:
 	Ui::ListAutoSortClass ui;
 
-	QList<InfoItem> titles;
+	QList<TitleItem> titles;
 };

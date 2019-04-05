@@ -66,7 +66,7 @@ void ListAutoSort::writeInfoTitles()
 	{
 		QString n = getXml(ts[i], "name");
 		QString p = getXml(ts[i], "pattern");
-		titles.append(InfoItem(n, p));
+		titles.append(TitleItem(n, p));
 	}
 }
 

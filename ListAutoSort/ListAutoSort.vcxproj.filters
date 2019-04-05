@@ -69,9 +69,6 @@
     </QtRcc>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="InfoItem.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="StringUtil.h">
       <Filter>Utils</Filter>
     </ClInclude>
@@ -92,6 +89,9 @@
     </ClInclude>
     <ClInclude Include="Defines.h">
       <Filter>Globals</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleItem.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

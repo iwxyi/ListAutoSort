@@ -2,16 +2,16 @@
 #include <QList>
 #include "StringUtil.h"
 
-class InfoItem
+class TitleItem
 {
 public:
-	InfoItem()
+	TitleItem()
 	{
 		name = "";
 		pattern = "";
 	}
 
-	InfoItem(QString n, QString p)
+	TitleItem(QString n, QString p)
 	{
 		name = n;
 		pattern = p;
@@ -30,7 +30,7 @@ public:
 			p = p + "$";
 	}
 
-	QString 3333getName()
+	QString getName()
 	{
 		return name;
 	}

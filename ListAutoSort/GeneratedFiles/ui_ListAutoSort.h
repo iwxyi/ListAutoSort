@@ -13,6 +13,8 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QHeaderView>
+#include <QtWidgets/QLineEdit>
+#include <QtWidgets/QListWidget>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
@@ -34,6 +36,8 @@ public:
     QPushButton *inputButton;
     QPushButton *pasteButton;
     QPushButton *addCol;
+    QListWidget *titileList;
+    QLineEdit *patternEdit;
     QMenuBar *menuBar;
     QMenu *menu;
     QMenu *menu_2;
@@ -46,24 +50,30 @@ public:
     {
         if (ListAutoSortClass->objectName().isEmpty())
             ListAutoSortClass->setObjectName(QStringLiteral("ListAutoSortClass"));
-        ListAutoSortClass->resize(596, 400);
+        ListAutoSortClass->resize(596, 481);
         centralWidget = new QWidget(ListAutoSortClass);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         tableView = new QTableView(centralWidget);
         tableView->setObjectName(QStringLiteral("tableView"));
-        tableView->setGeometry(QRect(235, 0, 351, 281));
+        tableView->setGeometry(QRect(235, 10, 351, 401));
         inputEdit = new QPlainTextEdit(centralWidget);
         inputEdit->setObjectName(QStringLiteral("inputEdit"));
-        inputEdit->setGeometry(QRect(10, 140, 211, 101));
+        inputEdit->setGeometry(QRect(10, 280, 221, 101));
         inputButton = new QPushButton(centralWidget);
         inputButton->setObjectName(QStringLiteral("inputButton"));
-        inputButton->setGeometry(QRect(20, 250, 75, 23));
+        inputButton->setGeometry(QRect(20, 390, 75, 23));
         pasteButton = new QPushButton(centralWidget);
         pasteButton->setObjectName(QStringLiteral("pasteButton"));
-        pasteButton->setGeometry(QRect(140, 250, 75, 23));
+        pasteButton->setGeometry(QRect(150, 390, 75, 23));
         addCol = new QPushButton(centralWidget);
         addCol->setObjectName(QStringLiteral("addCol"));
-        addCol->setGeometry(QRect(20, 10, 75, 23));
+        addCol->setGeometry(QRect(160, 250, 61, 23));
+        titileList = new QListWidget(centralWidget);
+        titileList->setObjectName(QStringLiteral("titileList"));
+        titileList->setGeometry(QRect(10, 10, 221, 201));
+        patternEdit = new QLineEdit(centralWidget);
+        patternEdit->setObjectName(QStringLiteral("patternEdit"));
+        patternEdit->setGeometry(QRect(10, 220, 221, 20));
         ListAutoSortClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(ListAutoSortClass);
         menuBar->setObjectName(QStringLiteral("menuBar"));
