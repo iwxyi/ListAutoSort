@@ -57,6 +57,9 @@
     <ClCompile Include="RuntimeInfo.cpp">
       <Filter>Globals</Filter>
     </ClCompile>
+    <ClCompile Include="ListItemDelegate.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="ListAutoSort.ui">
@@ -96,6 +99,9 @@
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="ListAutoSort.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="ListItemDelegate.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

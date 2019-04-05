@@ -13,6 +13,11 @@ ListAutoSort::ListAutoSort(QWidget *parent)
  */
 void ListAutoSort::initView()
 {
+	ui.titileList->setEditTriggers(QAbstractItemView::DoubleClicked);
+	ListItemDelegate* delegate = new ListItemDelegate(this);
+	ui.titileList->setItemDelegate(delegate);
+	connect(delegate, SIGNAL(signalTextModified(int, QString)), this, SLOT(slotTitleItemTextModified(int, QString)));
+
 	connect(ui.addCol, SIGNAL(clicked()), this, SLOT(slotAddCol()));
 	connect(ui.inputButton, SIGNAL(clicked()), this, SLOT(slotInputButtonClicked()));
 	connect(ui.pasteButton, SIGNAL(clicked()), this, SLOT(slotPasteButtonClicked()));
@@ -81,6 +86,7 @@ void ListAutoSort::refreshList()
 	for (int i = 0; i < titles.size(); i++)
 	{
 		QListWidgetItem* item = new QListWidgetItem(titles[i].getName(), ui.titileList);
+		item->setFlags(item->flags() | Qt::ItemIsEditable);
 	}
 }
 
@@ -90,6 +96,7 @@ void ListAutoSort::refreshList()
 void ListAutoSort::slotAddCol()
 {
 	QListWidgetItem* item = new QListWidgetItem(QStringLiteral("新字段"), ui.titileList);
+	item->setFlags(item->flags() | Qt::ItemIsEditable);
 	titles.append(TitleItem(QStringLiteral("新字段"), ""));
 }
 
@@ -137,4 +144,15 @@ void ListAutoSort::slotDeleteListItem()
 
 	ui.titileList->takeItem(index); // 不知道为什么removeWidgetItem无效
 	delete item; // takeItem 需要手动 delete
+}
+
+void ListAutoSort::slotTitleItemTextModified(int row, QString text)
+{
+	if (row < 0 || row >= titles.size())
+		return;
+	if (titles[row].getName() == text)
+		return;
+
+	titles[row].setName(text);
+	QMessageBox::information(this, "qwe", text);
 }

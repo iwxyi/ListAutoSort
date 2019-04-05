@@ -115,6 +115,7 @@
     <ClCompile Include="FileUtil.cpp" />
     <ClCompile Include="Global.cpp" />
     <ClCompile Include="ListAutoSort.cpp" />
+    <ClCompile Include="ListItemDelegate.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="RuntimeInfo.cpp" />
     <ClCompile Include="StringUtil.cpp" />
@@ -133,10 +134,14 @@
     <ClInclude Include="Defines.h" />
     <ClInclude Include="FileUtil.h" />
     <ClInclude Include="Global.h" />
-    <ClInclude Include="TitleItem.h" />
+    <QtMoc Include="ListItemDelegate.h">
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets</IncludePath>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets</IncludePath>
+    </QtMoc>
     <ClInclude Include="RuntimeInfo.h" />
     <ClInclude Include="Settings.h" />
     <ClInclude Include="StringUtil.h" />
+    <ClInclude Include="TitleItem.h" />
     <ClInclude Include="USettings.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

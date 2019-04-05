@@ -71,7 +71,6 @@ public:
         titileList = new QListWidget(centralWidget);
         titileList->setObjectName(QStringLiteral("titileList"));
         titileList->setGeometry(QRect(10, 10, 221, 201));
-        titileList->setContextMenuPolicy(Qt::CustomContextMenu);
         patternEdit = new QLineEdit(centralWidget);
         patternEdit->setObjectName(QStringLiteral("patternEdit"));
         patternEdit->setGeometry(QRect(10, 220, 221, 20));

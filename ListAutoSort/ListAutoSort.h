@@ -14,6 +14,7 @@
 #include "FileUtil.h"
 #include "Global.h"
 #include "StringUtil.h"
+#include "ListItemDelegate.h"
 
 class ListAutoSort : public QMainWindow
 {
@@ -38,6 +39,7 @@ public slots :
 	void slotPasteButtonClicked();
 	void slotListItemMenu(QPoint p);
 	void slotDeleteListItem();
+	void slotTitleItemTextModified(int row, QString text);
 
 signals:
 
