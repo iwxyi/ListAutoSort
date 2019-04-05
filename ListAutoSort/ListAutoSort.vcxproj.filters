@@ -31,6 +31,9 @@
     <Filter Include="Utils">
       <UniqueIdentifier>{6657d008-120d-4a70-a4b2-348831822910}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Globals">
+      <UniqueIdentifier>{c019512a-48bd-463e-9e29-f0270bcc69c6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -42,11 +45,18 @@
     <ClCompile Include="StringUtil.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <QtMoc Include="ListAutoSort.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
+    <ClCompile Include="FileUtil.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Global.cpp">
+      <Filter>Globals</Filter>
+    </ClCompile>
+    <ClCompile Include="USettings.cpp">
+      <Filter>Globals</Filter>
+    </ClCompile>
+    <ClCompile Include="RuntimeInfo.cpp">
+      <Filter>Globals</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="ListAutoSort.ui">
@@ -68,5 +78,25 @@
     <ClInclude Include="Settings.h">
       <Filter>Utils</Filter>
     </ClInclude>
+    <ClInclude Include="FileUtil.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="RuntimeInfo.h">
+      <Filter>Globals</Filter>
+    </ClInclude>
+    <ClInclude Include="Global.h">
+      <Filter>Globals</Filter>
+    </ClInclude>
+    <ClInclude Include="USettings.h">
+      <Filter>Globals</Filter>
+    </ClInclude>
+    <ClInclude Include="Defines.h">
+      <Filter>Globals</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="ListAutoSort.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
 </Project>

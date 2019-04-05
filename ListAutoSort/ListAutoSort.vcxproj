@@ -112,9 +112,13 @@
     </QtRcc>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="FileUtil.cpp" />
+    <ClCompile Include="Global.cpp" />
     <ClCompile Include="ListAutoSort.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="RuntimeInfo.cpp" />
     <ClCompile Include="StringUtil.cpp" />
+    <ClCompile Include="USettings.cpp" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="ListAutoSort.h" />
@@ -126,9 +130,14 @@
     <QtRcc Include="ListAutoSort.qrc" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Defines.h" />
+    <ClInclude Include="FileUtil.h" />
+    <ClInclude Include="Global.h" />
     <ClInclude Include="InfoItem.h" />
+    <ClInclude Include="RuntimeInfo.h" />
     <ClInclude Include="Settings.h" />
     <ClInclude Include="StringUtil.h" />
+    <ClInclude Include="USettings.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
