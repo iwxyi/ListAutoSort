@@ -19,8 +19,8 @@ bool canRegExp(QString str, QString pat); // ƒ‹∑Ò’˝‘Ú∆•≈‰
 
 QString getXml(QString str, QString pat);
 QStringList getXmls(QString str, QString pat);
-QString makeXml(QString str, QString pat);
-QString makeXml(int i, QString pat);
+QString toXml(QString str, QString pat);
+QString toXml(int i, QString pat);
 
 QString ArabToCN(int num);
 

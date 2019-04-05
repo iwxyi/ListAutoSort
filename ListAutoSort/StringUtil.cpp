@@ -62,12 +62,12 @@ QStringList getXmls(QString str, QString pat)
 	return getStrMids(str, "<" + pat + ">", "</" + pat + ">");
 }
 
-QString makeXml(QString str, QString pat)
+QString toXml(QString str, QString pat)
 {
 	return QString("<%1>%2</%3>").arg(pat).arg(str).arg(pat);
 }
 
-QString makeXml(int i, QString pat)
+QString toXml(int i, QString pat)
 {
 	return QString("<%1>%2</%3>").arg(pat).arg(i).arg(pat);
 }

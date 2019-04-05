@@ -14,34 +14,6 @@ QString VERSION_NUMBER = "v1.0";
 USettings* us;
 RuntimeInfo* rt;
 
-bool deb(QVariant str, QString name)
-{
-    qDebug() << "-------¡¾" << name << "¡¿-------";
-    qDebug() << str.toString() << endl;
-    return true;
-}
-
-bool deb(QVariant str)
-{
-    qDebug() << "------------------------";
-    qDebug() << str.toString() << endl;
-    return true;
-}
-
-void Log(QVariant str)
-{
-    if (us != nullptr && us->is_debug)
-        deb(str);
-}
-
-QString Path(QString str)
-{
-    if (str.endsWith("/"))
-        return rt->DATA_PATH + str;
-    else
-        return rt->DATA_PATH + str + "/";
-}
-
 void initGlobal()
 {
     rt = new RuntimeInfo();

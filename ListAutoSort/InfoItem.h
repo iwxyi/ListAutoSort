@@ -7,19 +7,19 @@ class InfoItem
 public:
 	InfoItem()
 	{
-		title = "";
+		name = "";
 		pattern = "";
 	}
 
 	InfoItem(QString n, QString p)
 	{
-		title = n;
+		name = n;
 		pattern = p;
 	}
 
 	void setName(QString n)
 	{
-		title = n;
+		name = n;
 	}
 
 	void setPattern(QString p)
@@ -30,12 +30,22 @@ public:
 			p = p + "$";
 	}
 
-	bool isMatch()
+	QString 3333getName()
 	{
-		return canRegExp(title, pattern);
+		return name;
 	}
 
-public:
-	QString title;
+	QString getPattern()
+	{
+		return pattern;
+	}
+
+	bool isMatch()
+	{
+		return canRegExp(name, pattern);
+	}
+
+private:
+	QString name;
 	QString pattern;
 };

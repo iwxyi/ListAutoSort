@@ -26,9 +26,56 @@ void ListAutoSort::initTable()
 
 }
 
+/**
+ * 从一段话中智能分辨不同的信息
+ */
 void ListAutoSort::smartAddInfo(QString str)
 {
-	
+
+}
+
+/*
+ * 从保存的文件中读取
+ */
+void ListAutoSort::readInfoTitles()
+{
+	QString savedPath = rt->DATA_PATH+"titles.txt";
+	QString content;
+
+	for (int i = 0; i < titles.size(); i++)
+	{
+		QString n = titles[i].getName();
+		QString p = titles[i].getPattern();
+		QString c = toXml(n, "name") + toXml(p, "pattern");
+		content += toXml(c, "title");
+	}
+
+	writeTextFile(savedPath, content);
+}
+
+/**
+ * 保存到文件之中
+ */
+void ListAutoSort::writeInfoTitles()
+{
+	QString savedPath = rt->DATA_PATH + "titles.txt";
+	QString content = readTextFile(savedPath);
+	QStringList ts = getXmls(content, "titles");
+
+	for (int i = 0; i < ts.size(); i++)
+	{
+		QString n = getXml(ts[i], "name");
+		QString p = getXml(ts[i], "pattern");
+		titles.append(InfoItem(n, p));
+	}
+}
+
+/**
+ * 做了更改之后刷新列表
+ */
+void ListAutoSort::refreshList()
+{
+
 }
 
 /**
@@ -36,7 +83,7 @@ void ListAutoSort::smartAddInfo(QString str)
  */
 void ListAutoSort::slotAddCol()
 {
-	
+
 }
 
 /**
