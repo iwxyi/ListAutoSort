@@ -41,9 +41,8 @@ private:
 	bool setTableARow(int row, QString mixture, QList<FieldItem>fields);
 	QStringList analyzeMixture(QString mixture, QList<FieldItem>fields);
 
-	void swapList(int from, int to);
-	void swapTableHori(int from, int to);
-	void swapTableVert(int from, int to);
+	void moveListItem(int from, int to);
+	void moveTableItem(int from, int to);
 
 public slots :
 	void slotInputButtonClicked();

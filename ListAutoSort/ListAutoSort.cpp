@@ -105,43 +105,52 @@ QStringList ListAutoSort::analyzeMixture(QString mixture, QList<FieldItem> field
 	return ai.getResult();
 }
 
-void ListAutoSort::swapList(int from, int to)
+/**
+ * 交换字段
+ * * 列表上下移动
+ * * 表格左右移动
+ */
+void ListAutoSort::moveListItem(int from, int to)
 {
 	if (from == to)
 		return;
-	if (from < to)
-	{
 
-	}
-	else if (from > to)
-	{
+	// 移动 QList
+	fields.move(from, to);
 
+	// 移动 QListWidget
+	ui.fieldsList->insertItem(to, new QListWidgetItem(ui.fieldsList->item(from)->text()));
+	QListWidgetItem* item = ui.fieldsList->item(from + (from > to ? 1 : 0));
+	ui.fieldsList->takeItem(from + (from > to ? 1 : 0));
+	delete item;
+	ui.fieldsList->setCurrentRow(to); // 设置为原来的Item移动后的索引
+
+	// 移动 QTableWidget
+	ui.tableWidget->insertColumn(to);
+	if (from > to) from++;
+	for (int i = 0; i < mixtures.size(); i++)
+	{
+		QTableWidgetItem* item = ui.tableWidget->item(i, from);
+		ui.tableWidget->setItem(i, to, new QTableWidgetItem(*item));
 	}
+	ui.tableWidget->removeColumn(from);
+	setTableHeader();
 }
 
-void ListAutoSort::swapTableHori(int from, int to)
+/**
+ * 交换内容
+ * * 表格上下移动
+ * * Mixtures上下移动
+ */
+void ListAutoSort::moveTableItem(int from, int to)
 {
 	if (from == to)
 		return;
-	if (from < to)
+	if (from < to) // 下移
 	{
 
 	}
-	else if (from > to)
-	{
-
-	}
-}
-
-void ListAutoSort::swapTableVert(int from, int to)
-{
-	if (from == to)
-		return;
-	if (from < to)
-	{
-
-	}
-	else if (from > to)
+	else if (from > to) // 上移
 	{
 
 	}
@@ -350,8 +359,8 @@ void ListAutoSort::slotFieldItemMoveUp()
 	if (index == 0)
 		return;
 
-	fields.move(index, index - 1);
-	swapList(index, index - 1);
+	//fields.move(index, index - 1);
+	moveListItem(index, index - 1);
 }
 
 void ListAutoSort::slotFieldItemMoveDown()
@@ -366,8 +375,8 @@ void ListAutoSort::slotFieldItemMoveDown()
 	if (index >= fields.size()-1)
 		return;
 
-	fields.move(index, index + 1);
-	swapList(index, index + 1);
+	//fields.move(index, index + 1);
+	moveListItem(index, index + 1);
 }
 
 void ListAutoSort::slotFieldItemMoveTop()
@@ -382,8 +391,8 @@ void ListAutoSort::slotFieldItemMoveTop()
 	if (index == 0)
 		return;
 
-	fields.move(index, 0);
-	swapList(index, 0);
+	//fields.move(index, 0);
+	moveListItem(index, 0);
 }
 
 void ListAutoSort::slotFieldItemMoveBottom()
@@ -398,8 +407,8 @@ void ListAutoSort::slotFieldItemMoveBottom()
 	if (index >= fields.size()-1)
 		return;
 
-	fields.move(index, fields.size() - 1);
-	swapList(index, fields.size() - 1);
+	//fields.move(index, fields.size() - 1);
+	moveListItem(index, fields.size() - 1);
 }
 
 /**
