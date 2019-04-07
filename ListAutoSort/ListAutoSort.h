@@ -18,6 +18,7 @@
 #include "Global.h"
 #include "StringUtil.h"
 #include "ListItemDelegate.h"
+#include "TableAITool.h"
 
 class ListAutoSort : public QMainWindow
 {

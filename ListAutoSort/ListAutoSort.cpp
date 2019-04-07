@@ -5,15 +5,16 @@ ListAutoSort::ListAutoSort(QWidget *parent)
 {
 	ui.setupUi(this);
 
+	// 初始化全局变量
 	rt = new RuntimeInfo();
 	us = new USettings(rt->DATA_PATH + "settings.ini");
 	savedPath = rt->DATA_PATH + "fields.txt";
 
-	readFIeldsInfo();
 	initView();
-	initTable();;
-
+	readFIeldsInfo();
+	initTable();
 }
+
 /**
  * 初始化控件与连接
  */
@@ -55,12 +56,12 @@ void ListAutoSort::initTable()
 void ListAutoSort::smartAddMixture(QString mixture)
 {
 	mixtures.append(mixture);
-
-	setTableARow(fields.size(), mixture, fields);
+	ui.tableWidget->setRowCount(mixtures.size()); // 设置行数（不包括标头行）
+	setTableARow(mixtures.size()-1, mixture, fields); // 设置行的内容
 }
 
 /**
- * 在某一行，加上分析后的文本
+ * 在某一行，加上分析后的文本（添加/更新）
  */
 void ListAutoSort::setTableARow(int row, QString mixture, QList<FieldItem>fields)
 {
@@ -81,7 +82,7 @@ void ListAutoSort::setTableARow(int row, QString mixture, QList<FieldItem>fields
 		return;
 	}
 
-	// 添加到表格的每一行
+	// 添加到表格的某一行
 	for (int i = 0; i < result.size(); i++)
 	{
 		QTableWidgetItem* item = new QTableWidgetItem(result[i]);
@@ -89,11 +90,12 @@ void ListAutoSort::setTableARow(int row, QString mixture, QList<FieldItem>fields
 	}
 }
 
+/**
+ * AI识别的方法（调用 TableAITool）
+ */
 QStringList ListAutoSort::analyzeMixture(QString mixture, QList<FieldItem> fields)
 {
-
-
-	return QStringList();
+	return TableAITool::analyzeMixture(mixture, fields);
 }
 
 /*
