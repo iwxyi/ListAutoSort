@@ -104,6 +104,48 @@ QStringList ListAutoSort::analyzeMixture(QString mixture, QList<FieldItem> field
 	return ai.getResult();
 }
 
+void ListAutoSort::swapList(int from, int to)
+{
+	if (from == to)
+		return;
+	if (from < to)
+	{
+
+	}
+	else if (from > to)
+	{
+
+	}
+}
+
+void ListAutoSort::swapTableHori(int from, int to)
+{
+	if (from == to)
+		return;
+	if (from < to)
+	{
+
+	}
+	else if (from > to)
+	{
+
+	}
+}
+
+void ListAutoSort::swapTableVert(int from, int to)
+{
+	if (from == to)
+		return;
+	if (from < to)
+	{
+
+	}
+	else if (from > to)
+	{
+
+	}
+}
+
 /*
  * 从保存的文件中读取
  */
@@ -205,7 +247,15 @@ void ListAutoSort::slotFieldItemMenu(QPoint p)
 
 	QMenu* menu = new QMenu(this);
 	QAction* deleteAction = new QAction(QStringLiteral("删除"), this);
+	QAction* moveUpAction = new QAction(QStringLiteral("上移"), this);
+	QAction* moveDownAction = new QAction(QStringLiteral("下移"), this);
+	QAction* moveTopAction = new QAction(QStringLiteral("置顶"), this);
+	QAction* moveBottomAction = new QAction(QStringLiteral("置底"), this);
 	menu->addAction(deleteAction);
+	menu->addAction(moveUpAction);
+	menu->addAction(moveDownAction);
+	menu->addAction(moveTopAction);
+	menu->addAction(moveBottomAction);
 	connect(deleteAction, SIGNAL(triggered()), this, SLOT(slotFieldItemDelete()));
 	menu->exec(QCursor::pos());
 }
@@ -218,18 +268,83 @@ void ListAutoSort::slotFieldItemDelete()
 	QListWidgetItem* item = ui.fieldsList->currentItem();
 	if (item == NULL)
 		return;
+	int index = ui.fieldsList->currentIndex().row();
+	if (index < 0 || index >= fields.size())
+		return;
 
 	// 删除字段列表
-	int index = ui.fieldsList->currentIndex().row();
-	if (index >= 0 && index < fields.size())
-		fields.removeAt(index);
+	fields.removeAt(index);
 
 	ui.fieldsList->takeItem(index); // 不知道为什么removeWidgetItem无效
 	delete item; // takeItem 需要手动 delete
 
-	setTableHeader();
+	ui.tableWidget->removeColumn(index);
 
 	writeFieldsInfo();
+}
+
+void ListAutoSort::slotFieldItemMoveUp()
+{
+	QListWidgetItem* item = ui.fieldsList->currentItem();
+	if (item == NULL)
+		return;
+	int index = ui.fieldsList->currentIndex().row();
+	if (index < 0 || index >= fields.size())
+		return;
+
+	if (index == 0)
+		return;
+
+	fields.move(index, index - 1);
+	swapList(index, index - 1);
+}
+
+void ListAutoSort::slotFieldItemMoveDown()
+{
+	QListWidgetItem* item = ui.fieldsList->currentItem();
+	if (item == NULL)
+		return;
+	int index = ui.fieldsList->currentIndex().row();
+	if (index < 0 || index >= fields.size())
+		return;
+
+	if (index >= fields.size()-1)
+		return;
+
+	fields.move(index, index + 1);
+	swapList(index, index + 1);
+}
+
+void ListAutoSort::slotFieldItemMoveTop()
+{
+	QListWidgetItem* item = ui.fieldsList->currentItem();
+	if (item == NULL)
+		return;
+	int index = ui.fieldsList->currentIndex().row();
+	if (index < 0 || index >= fields.size())
+		return;
+
+	if (index == 0)
+		return;
+
+	fields.move(index, 0);
+	swapList(index, 0);
+}
+
+void ListAutoSort::slotFieldItemMoveBottom()
+{
+	QListWidgetItem* item = ui.fieldsList->currentItem();
+	if (item == NULL)
+		return;
+	int index = ui.fieldsList->currentIndex().row();
+	if (index < 0 || index >= fields.size())
+		return;
+
+	if (index >= fields.size()-1)
+		return;
+
+	fields.move(index, fields.size() - 1);
+	swapList(index, fields.size() - 1);
 }
 
 /**
@@ -258,7 +373,17 @@ void ListAutoSort::slotFieldItemTextModified(int row, QString text)
 	fields[row].setName(text);
 	ui.fieldsList->setCurrentRow(row);
 
-	setTableHeader();
+	//setTableHeader();
+	QTableWidgetItem* item = ui.tableWidget->item(0, row);
+	if (item == NULL) // 实测是NULL……
+	{
+		setTableHeader();
+	}
+	else
+	{
+		item->setText(text);
+		ui.tableWidget->setHorizontalHeaderItem(row, item);
+	}
 
 	writeFieldsInfo();
 }

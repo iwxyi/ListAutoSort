@@ -39,15 +39,24 @@ private:
 	bool setTableARow(int row, QString mixture, QList<FieldItem>fields);
 	QStringList analyzeMixture(QString mixture, QList<FieldItem>fields);
 
+	void swapList(int from, int to);
+	void swapTableHori(int from, int to);
+	void swapTableVert(int from, int to);
+
 public slots :
 	void slotInputButtonClicked();
 	void slotPasteButtonClicked();
 	void slotFieldItemAdd();
-	void slotFieldItemMenu(QPoint p);
-	void slotFieldItemDelete();
 	void slotFieldItemRowChanged();
 	void slotFieldItemTextModified(int row, QString text);
 	void slotFieldItemPatternModified(QString text);
+
+	void slotFieldItemMenu(QPoint p);
+	void slotFieldItemDelete();
+	void slotFieldItemMoveUp();
+	void slotFieldItemMoveDown();
+	void slotFieldItemMoveTop();
+	void slotFieldItemMoveBottom();
 
 signals:
 
