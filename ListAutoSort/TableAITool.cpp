@@ -20,11 +20,10 @@ void TableAITool::start()
  */
 void TableAITool::init()
 {
-	count = fields.size();
-	for (int i = 0; i < count; i++)
+	for (int i = 0; i < fields.size(); i++)
 	{
 		result << "";          // 先初始化成空的
-		capture.append(false);
+		captured.append(false);
 	}
 }
 
@@ -69,10 +68,10 @@ void TableAITool::compareFields()
 		{
 			int index = same[i]; // 对应字段的索引
 			qDebug() << QStringLiteral("匹配：") << fields[index].getName() << "  " << infos[i + 1];
-			if (capture[index]) // 重复匹配了……
+			if (captured[index]) // 重复匹配了……
 				continue;
 			result[index] = infos[i + 1];
-			capture[index] = true;
+			captured[index] = true;
 		}
 	}
 
@@ -93,7 +92,45 @@ void TableAITool::compareFields()
  */
 void TableAITool::compareRegExp()
 {
+	QList<IndexConnection>ics;
 
+	// 检测所有单个匹配的
+	bool find = true;
+	int index = 0;
+	while (find)
+	{
+		if (index >= fields.size())
+			break;
+		if (captured[index] || fields[index].getPattern().isEmpty())
+		{
+			index++;
+			continue;
+		}
+
+		// 寻找所有能匹配的信息，以及第一个匹配的位置
+		int count = 0, place = -1;
+		for (int i = 0; i < infos.size(); i++)
+			if (canMatch(infos[i], fields[index].getPattern()))
+			{
+				count++;
+				if (place == -1)
+					place = i;
+			}
+
+		// 有且仅有这一个能匹配
+		if (count == 1)
+		{
+			result[index] = infos[place];
+			qDebug() << QStringLiteral("正则匹配到：") << infos[place] << "    " << fields[index].getPattern();
+			infos.removeAt(place);  // 匹配后删除
+			captured[index] = true; // 这个字段匹配了
+			index = 0;              // 从头开始计算
+		}
+		else
+		{
+			index++;                // 没有匹配，继续尝试下一个
+		}
+	}
 }
 
 /*

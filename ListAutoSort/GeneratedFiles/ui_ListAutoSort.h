@@ -147,6 +147,8 @@ public:
 
         horizontalLayout->addWidget(tableWidget);
 
+        horizontalLayout->setStretch(0, 1);
+        horizontalLayout->setStretch(1, 3);
 
         horizontalLayout_2->addLayout(horizontalLayout);
 
