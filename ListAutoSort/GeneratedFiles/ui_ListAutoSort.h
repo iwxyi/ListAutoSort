@@ -49,7 +49,11 @@ public:
     QSpacerItem *horizontalSpacer_2;
     QPushButton *pasteButton;
     QSpacerItem *horizontalSpacer_4;
+    QVBoxLayout *verticalLayout;
     QTableWidget *tableWidget;
+    QHBoxLayout *horizontalLayout_5;
+    QSpacerItem *horizontalSpacer_5;
+    QPushButton *copyExcelButton;
     QMenuBar *menuBar;
     QMenu *menu;
     QMenu *menu_2;
@@ -142,10 +146,33 @@ public:
 
         horizontalLayout->addLayout(inputVLayout);
 
+        verticalLayout = new QVBoxLayout();
+        verticalLayout->setSpacing(6);
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
+        verticalLayout->setContentsMargins(-1, -1, 0, -1);
         tableWidget = new QTableWidget(centralWidget);
         tableWidget->setObjectName(QStringLiteral("tableWidget"));
 
-        horizontalLayout->addWidget(tableWidget);
+        verticalLayout->addWidget(tableWidget);
+
+        horizontalLayout_5 = new QHBoxLayout();
+        horizontalLayout_5->setSpacing(6);
+        horizontalLayout_5->setObjectName(QStringLiteral("horizontalLayout_5"));
+        horizontalLayout_5->setContentsMargins(-1, 0, -1, -1);
+        horizontalSpacer_5 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_5->addItem(horizontalSpacer_5);
+
+        copyExcelButton = new QPushButton(centralWidget);
+        copyExcelButton->setObjectName(QStringLiteral("copyExcelButton"));
+
+        horizontalLayout_5->addWidget(copyExcelButton);
+
+
+        verticalLayout->addLayout(horizontalLayout_5);
+
+
+        horizontalLayout->addLayout(verticalLayout);
 
         horizontalLayout->setStretch(0, 1);
         horizontalLayout->setStretch(1, 3);
@@ -188,6 +215,7 @@ public:
         addCol->setText(QApplication::translate("ListAutoSortClass", "\346\267\273\345\212\240\345\255\227\346\256\265", nullptr));
         inputButton->setText(QApplication::translate("ListAutoSortClass", "\346\231\272\350\203\275\345\210\206\346\236\220", nullptr));
         pasteButton->setText(QApplication::translate("ListAutoSortClass", "\350\257\206\345\210\253\345\211\252\350\264\264\346\235\277", nullptr));
+        copyExcelButton->setText(QApplication::translate("ListAutoSortClass", "\345\244\215\345\210\266\344\270\272Excel", nullptr));
         menu->setTitle(QApplication::translate("ListAutoSortClass", "\346\226\207\344\273\266", nullptr));
         menu_2->setTitle(QApplication::translate("ListAutoSortClass", "\347\274\226\350\276\221", nullptr));
         menu_3->setTitle(QApplication::translate("ListAutoSortClass", "\350\256\276\347\275\256", nullptr));

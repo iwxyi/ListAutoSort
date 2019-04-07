@@ -31,6 +31,7 @@ void ListAutoSort::initView()
 	connect(ui.addCol, SIGNAL(clicked()), this, SLOT(slotFieldItemAdd()));
 	connect(ui.inputButton, SIGNAL(clicked()), this, SLOT(slotInputButtonClicked()));
 	connect(ui.pasteButton, SIGNAL(clicked()), this, SLOT(slotPasteButtonClicked()));
+	connect(ui.copyExcelButton, SIGNAL(clicked()), this, SLOT(slotExcelButtonClicked()));
 	connect(ui.fieldsList, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(slotFieldItemMenu(QPoint)));
 	//connect(ui.fieldsList, SIGNAL(itemChanged(QListWidgetItem *)), this, SLOT(slotFieldItemRowChanged())); // 无效
 	//connect(ui.fieldsList, SIGNAL(itemActivated(QListWidgetItem *)), this, SLOT(slotFieldItemRowChanged())); // 无效
@@ -234,6 +235,40 @@ void ListAutoSort::slotPasteButtonClicked()
 	const QClipboard* clipboard = QApplication::clipboard();
 	QString str = clipboard->text();
 	smartAddMixture(str);
+}
+
+/**
+ * 复制表格的内容为Excel，换行+Tab
+ */
+void ListAutoSort::slotExcelButtonClicked()
+{
+	// 复制内容
+	QString ans;
+	for (int i = 0; i < mixtures.size(); i++)
+	{
+		for (int j = 0; j < fields.size(); j++)
+		{
+			if (j > 0) ans += "\t";
+			ans += ui.tableWidget->item(i, j)->text();
+		}
+		ans += "\n";
+	}
+	QClipboard* clipboard = QApplication::clipboard();
+	clipboard->setText(ans);
+
+	// 是否有长数据
+	bool hasLongNumber = false;
+	for (int i = 0; i < fields.size(); i++)
+		if (canRegExp(fields[i].getPattern(), ""))
+		{
+			hasLongNumber = true;
+			break;
+		}
+
+	QString tip = QStringLiteral("%1行%2列 复制完毕，请到Excel对应的位置粘贴").arg(mixtures.size()).arg(fields.size());
+	if (hasLongNumber)
+		tip += QStringLiteral("\n\n检测到长数字字段，建议先将单元格格式设置为文本");
+	QMessageBox::information(this, QStringLiteral("复制为Excel"), tip);
 }
 
 /**

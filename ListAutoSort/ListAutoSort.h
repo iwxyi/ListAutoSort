@@ -48,6 +48,8 @@ private:
 public slots :
 	void slotInputButtonClicked();
 	void slotPasteButtonClicked();
+	void slotExcelButtonClicked();
+
 	void slotFieldItemAdd();
 	void slotFieldItemRowChanged();
 	void slotFieldItemTextModified(int row, QString text);
