@@ -52,6 +52,7 @@ public slots :
 	void slotFieldItemPatternModified(QString text);
 
 	void slotFieldItemMenu(QPoint p);
+	void slotFieldItemRename();
 	void slotFieldItemDelete();
 	void slotFieldItemMoveUp();
 	void slotFieldItemMoveDown();

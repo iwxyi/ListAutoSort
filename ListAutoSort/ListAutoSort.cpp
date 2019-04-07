@@ -246,18 +246,38 @@ void ListAutoSort::slotFieldItemMenu(QPoint p)
 		return;
 
 	QMenu* menu = new QMenu(this);
+	QAction* renameAction = new QAction(QStringLiteral("ÖØÃüÃû"), this);
 	QAction* deleteAction = new QAction(QStringLiteral("É¾³ý"), this);
 	QAction* moveUpAction = new QAction(QStringLiteral("ÉÏÒÆ"), this);
 	QAction* moveDownAction = new QAction(QStringLiteral("ÏÂÒÆ"), this);
 	QAction* moveTopAction = new QAction(QStringLiteral("ÖÃ¶¥"), this);
 	QAction* moveBottomAction = new QAction(QStringLiteral("ÖÃµ×"), this);
+	menu->addAction(renameAction);
 	menu->addAction(deleteAction);
 	menu->addAction(moveUpAction);
 	menu->addAction(moveDownAction);
 	menu->addAction(moveTopAction);
 	menu->addAction(moveBottomAction);
+	connect(renameAction, SIGNAL(triggered()), this, SLOT(slotFieldItemRename()));
 	connect(deleteAction, SIGNAL(triggered()), this, SLOT(slotFieldItemDelete()));
+	connect(moveUpAction, SIGNAL(triggered()), this, SLOT(slotFieldItemMoveUp()));
+	connect(moveDownAction, SIGNAL(triggered()), this, SLOT(slotFieldItemMoveDown()));
+	connect(moveTopAction, SIGNAL(triggered()), this, SLOT(slotFieldItemMoveTop()));
+	connect(moveBottomAction, SIGNAL(triggered()), this, SLOT(slotFieldItemMoveBottom()));
+
 	menu->exec(QCursor::pos());
+}
+
+void ListAutoSort::slotFieldItemRename()
+{
+	QListWidgetItem* item = ui.fieldsList->currentItem();
+	if (item == NULL)
+		return;
+	int index = ui.fieldsList->currentIndex().row();
+	if (index < 0 || index >= fields.size())
+		return;
+
+	ui.fieldsList->editItem(item);
 }
 
 /**
