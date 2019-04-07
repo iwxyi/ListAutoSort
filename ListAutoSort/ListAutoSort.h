@@ -11,6 +11,8 @@
 #include <QPoint>
 #include <QAction>
 #include <QListWidgetItem>
+#include <QTableWidgetItem>
+#include <QTableWidget>
 #include "FieldItem.h"
 #include "FileUtil.h"
 #include "Global.h"
@@ -51,4 +53,5 @@ private:
 
 	QString savedPath;
 	QList<FieldItem> fields;
+	QStringList mixtures;
 };

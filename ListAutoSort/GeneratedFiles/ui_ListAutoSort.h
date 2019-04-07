@@ -12,6 +12,7 @@
 #include <QtCore/QVariant>
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QListWidget>
@@ -20,9 +21,11 @@
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPlainTextEdit>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QStatusBar>
-#include <QtWidgets/QTableView>
+#include <QtWidgets/QTableWidget>
 #include <QtWidgets/QToolBar>
+#include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -31,13 +34,22 @@ class Ui_ListAutoSortClass
 {
 public:
     QWidget *centralWidget;
-    QTableView *tableView;
-    QPlainTextEdit *inputEdit;
-    QPushButton *inputButton;
-    QPushButton *pasteButton;
-    QPushButton *addCol;
+    QHBoxLayout *horizontalLayout_2;
+    QHBoxLayout *horizontalLayout;
+    QVBoxLayout *inputVLayout;
     QListWidget *fieldsList;
     QLineEdit *patternEdit;
+    QHBoxLayout *horizontalLayout_4;
+    QSpacerItem *horizontalSpacer;
+    QPushButton *addCol;
+    QPlainTextEdit *inputEdit;
+    QHBoxLayout *horizontalLayout_3;
+    QSpacerItem *horizontalSpacer_3;
+    QPushButton *inputButton;
+    QSpacerItem *horizontalSpacer_2;
+    QPushButton *pasteButton;
+    QSpacerItem *horizontalSpacer_4;
+    QTableWidget *tableWidget;
     QMenuBar *menuBar;
     QMenu *menu;
     QMenu *menu_2;
@@ -50,35 +62,98 @@ public:
     {
         if (ListAutoSortClass->objectName().isEmpty())
             ListAutoSortClass->setObjectName(QStringLiteral("ListAutoSortClass"));
-        ListAutoSortClass->resize(596, 481);
+        ListAutoSortClass->resize(705, 509);
         centralWidget = new QWidget(ListAutoSortClass);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
-        tableView = new QTableView(centralWidget);
-        tableView->setObjectName(QStringLiteral("tableView"));
-        tableView->setGeometry(QRect(235, 10, 351, 401));
-        inputEdit = new QPlainTextEdit(centralWidget);
-        inputEdit->setObjectName(QStringLiteral("inputEdit"));
-        inputEdit->setGeometry(QRect(10, 280, 221, 101));
-        inputButton = new QPushButton(centralWidget);
-        inputButton->setObjectName(QStringLiteral("inputButton"));
-        inputButton->setGeometry(QRect(20, 390, 75, 23));
-        pasteButton = new QPushButton(centralWidget);
-        pasteButton->setObjectName(QStringLiteral("pasteButton"));
-        pasteButton->setGeometry(QRect(150, 390, 75, 23));
-        addCol = new QPushButton(centralWidget);
-        addCol->setObjectName(QStringLiteral("addCol"));
-        addCol->setGeometry(QRect(160, 250, 61, 23));
+        horizontalLayout_2 = new QHBoxLayout(centralWidget);
+        horizontalLayout_2->setSpacing(6);
+        horizontalLayout_2->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
+        horizontalLayout = new QHBoxLayout();
+        horizontalLayout->setSpacing(6);
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
+        inputVLayout = new QVBoxLayout();
+        inputVLayout->setSpacing(6);
+        inputVLayout->setObjectName(QStringLiteral("inputVLayout"));
+        inputVLayout->setSizeConstraint(QLayout::SetDefaultConstraint);
         fieldsList = new QListWidget(centralWidget);
         fieldsList->setObjectName(QStringLiteral("fieldsList"));
-        fieldsList->setGeometry(QRect(10, 10, 221, 201));
         fieldsList->setContextMenuPolicy(Qt::CustomContextMenu);
+
+        inputVLayout->addWidget(fieldsList);
+
         patternEdit = new QLineEdit(centralWidget);
         patternEdit->setObjectName(QStringLiteral("patternEdit"));
-        patternEdit->setGeometry(QRect(10, 220, 221, 20));
+
+        inputVLayout->addWidget(patternEdit);
+
+        horizontalLayout_4 = new QHBoxLayout();
+        horizontalLayout_4->setSpacing(6);
+        horizontalLayout_4->setObjectName(QStringLiteral("horizontalLayout_4"));
+        horizontalLayout_4->setSizeConstraint(QLayout::SetMinimumSize);
+        horizontalLayout_4->setContentsMargins(-1, 0, -1, -1);
+        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_4->addItem(horizontalSpacer);
+
+        addCol = new QPushButton(centralWidget);
+        addCol->setObjectName(QStringLiteral("addCol"));
+
+        horizontalLayout_4->addWidget(addCol);
+
+
+        inputVLayout->addLayout(horizontalLayout_4);
+
+        inputEdit = new QPlainTextEdit(centralWidget);
+        inputEdit->setObjectName(QStringLiteral("inputEdit"));
+
+        inputVLayout->addWidget(inputEdit);
+
+        horizontalLayout_3 = new QHBoxLayout();
+        horizontalLayout_3->setSpacing(6);
+        horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
+        horizontalLayout_3->setSizeConstraint(QLayout::SetMinimumSize);
+        horizontalLayout_3->setContentsMargins(-1, 0, -1, -1);
+        horizontalSpacer_3 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_3->addItem(horizontalSpacer_3);
+
+        inputButton = new QPushButton(centralWidget);
+        inputButton->setObjectName(QStringLiteral("inputButton"));
+
+        horizontalLayout_3->addWidget(inputButton);
+
+        horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_3->addItem(horizontalSpacer_2);
+
+        pasteButton = new QPushButton(centralWidget);
+        pasteButton->setObjectName(QStringLiteral("pasteButton"));
+
+        horizontalLayout_3->addWidget(pasteButton);
+
+        horizontalSpacer_4 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_3->addItem(horizontalSpacer_4);
+
+
+        inputVLayout->addLayout(horizontalLayout_3);
+
+
+        horizontalLayout->addLayout(inputVLayout);
+
+        tableWidget = new QTableWidget(centralWidget);
+        tableWidget->setObjectName(QStringLiteral("tableWidget"));
+
+        horizontalLayout->addWidget(tableWidget);
+
+
+        horizontalLayout_2->addLayout(horizontalLayout);
+
         ListAutoSortClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(ListAutoSortClass);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 596, 23));
+        menuBar->setGeometry(QRect(0, 0, 705, 23));
         menu = new QMenu(menuBar);
         menu->setObjectName(QStringLiteral("menu"));
         menu_2 = new QMenu(menuBar);
@@ -108,9 +183,9 @@ public:
     void retranslateUi(QMainWindow *ListAutoSortClass)
     {
         ListAutoSortClass->setWindowTitle(QApplication::translate("ListAutoSortClass", "ListAutoSort", nullptr));
-        inputButton->setText(QApplication::translate("ListAutoSortClass", "\346\231\272\350\203\275\346\267\273\345\212\240", nullptr));
-        pasteButton->setText(QApplication::translate("ListAutoSortClass", "\345\211\252\350\264\264\346\235\277\350\257\273\345\217\226", nullptr));
-        addCol->setText(QApplication::translate("ListAutoSortClass", "\346\267\273\345\212\240\346\226\260\345\210\227", nullptr));
+        addCol->setText(QApplication::translate("ListAutoSortClass", "\346\267\273\345\212\240\345\255\227\346\256\265", nullptr));
+        inputButton->setText(QApplication::translate("ListAutoSortClass", "\346\231\272\350\203\275\345\210\206\346\236\220", nullptr));
+        pasteButton->setText(QApplication::translate("ListAutoSortClass", "\350\257\206\345\210\253\345\211\252\350\264\264\346\235\277", nullptr));
         menu->setTitle(QApplication::translate("ListAutoSortClass", "\346\226\207\344\273\266", nullptr));
         menu_2->setTitle(QApplication::translate("ListAutoSortClass", "\347\274\226\350\276\221", nullptr));
         menu_3->setTitle(QApplication::translate("ListAutoSortClass", "\350\256\276\347\275\256", nullptr));

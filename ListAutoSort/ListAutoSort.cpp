@@ -19,11 +19,14 @@ ListAutoSort::ListAutoSort(QWidget *parent)
  */
 void ListAutoSort::initView()
 {
-	ui.fieldsList->setEditTriggers(QAbstractItemView::DoubleClicked);
+	ui.fieldsList->setEditTriggers(QAbstractItemView::DoubleClicked); // ÔÊÐíË«»÷±à¼­
+
+	// ÉèÖÃ´úÀí£¬´¦ÀíË«»÷±à¼­½áÊøÊÂ¼þ
 	ListItemDelegate* delegate = new ListItemDelegate(this);
 	ui.fieldsList->setItemDelegate(delegate);
 	connect(delegate, SIGNAL(signalTextModified(int, QString)), this, SLOT(slotFieldItemTextModified(int, QString)));
 
+	// Á¬½ÓÐÅºÅ²Û
 	connect(ui.addCol, SIGNAL(clicked()), this, SLOT(slotFieldItemAdd()));
 	connect(ui.inputButton, SIGNAL(clicked()), this, SLOT(slotInputButtonClicked()));
 	connect(ui.pasteButton, SIGNAL(clicked()), this, SLOT(slotPasteButtonClicked()));
@@ -39,6 +42,11 @@ void ListAutoSort::initView()
  */
 void ListAutoSort::initTable()
 {
+	ui.tableWidget->setColumnCount(fields.size());
+	QStringList labels;
+	for (int i = 0; i < fields.size(); i++)
+		labels.append(fields[i].getName());
+	ui.tableWidget->setHorizontalHeaderLabels(labels);
 }
 
 /**
@@ -46,7 +54,7 @@ void ListAutoSort::initTable()
  */
 void ListAutoSort::smartAddMixture(QString str)
 {
-	QMessageBox::information(this, QStringLiteral("·ÖÎö"), str);
+	mixtures.append(str);
 }
 
 /*
@@ -120,6 +128,7 @@ void ListAutoSort::slotInputButtonClicked()
 {
 	QString str = ui.inputEdit->toPlainText();
 	smartAddMixture(str);
+	ui.inputEdit->setPlainText("");
 }
 
 /**
@@ -132,6 +141,9 @@ void ListAutoSort::slotPasteButtonClicked()
 	smartAddMixture(str);
 }
 
+/**
+ * ×Ö¶ÎÓÒ¼ü²Ëµ¥
+ */
 void ListAutoSort::slotFieldItemMenu(QPoint p)
 {
 	QListWidgetItem* item = ui.fieldsList->itemAt(p);
@@ -145,6 +157,9 @@ void ListAutoSort::slotFieldItemMenu(QPoint p)
 	menu->exec(QCursor::pos());
 }
 
+/**
+ * É¾³ý×Ö¶Î
+ */
 void ListAutoSort::slotFieldItemDelete()
 {
 	QListWidgetItem* item = ui.fieldsList->currentItem();

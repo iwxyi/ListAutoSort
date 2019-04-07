@@ -29,10 +29,10 @@ public:
 
 	void setPattern(QString p)
 	{
-		if (!p.startsWith("^"))
+		/*if (!p.startsWith("^"))
 			p = "^" + p;
 		if (!p.endsWith("$"))
-			p = p + "$";
+			p = p + "$";*/
 		pattern = p;
 	}
 
