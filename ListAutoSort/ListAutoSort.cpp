@@ -19,15 +19,19 @@ ListAutoSort::ListAutoSort(QWidget *parent)
  */
 void ListAutoSort::initView()
 {
-	ui.titileList->setEditTriggers(QAbstractItemView::DoubleClicked);
+	ui.fieldsList->setEditTriggers(QAbstractItemView::DoubleClicked);
 	ListItemDelegate* delegate = new ListItemDelegate(this);
-	ui.titileList->setItemDelegate(delegate);
+	ui.fieldsList->setItemDelegate(delegate);
 	connect(delegate, SIGNAL(signalTextModified(int, QString)), this, SLOT(slotFieldItemTextModified(int, QString)));
 
 	connect(ui.addCol, SIGNAL(clicked()), this, SLOT(slotFieldItemAdd()));
 	connect(ui.inputButton, SIGNAL(clicked()), this, SLOT(slotInputButtonClicked()));
 	connect(ui.pasteButton, SIGNAL(clicked()), this, SLOT(slotPasteButtonClicked()));
-	connect(ui.titileList, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(slotFieldItemMenu(QPoint)));
+	connect(ui.fieldsList, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(slotFieldItemMenu(QPoint)));
+	//connect(ui.fieldsList, SIGNAL(itemChanged(QListWidgetItem *)), this, SLOT(slotFieldItemRowChanged())); // 无效
+	//connect(ui.fieldsList, SIGNAL(itemActivated(QListWidgetItem *)), this, SLOT(slotFieldItemRowChanged())); // 无效
+	connect(ui.fieldsList, SIGNAL(currentRowChanged(int)), this, SLOT(slotFieldItemRowChanged()));
+	connect(ui.patternEdit, SIGNAL(textChanged(QString)), this, SLOT(slotFieldItemPatternModified(QString)));
 }
 
 /**
@@ -89,11 +93,11 @@ void ListAutoSort::readFIeldsInfo()
  */
 void ListAutoSort::refreshFieldsInfo()
 {
-	ui.titileList->clear();
+	ui.fieldsList->clear();
 
 	for (int i = 0; i < fields.size(); i++)
 	{
-		QListWidgetItem* item = new QListWidgetItem(fields[i].getName(), ui.titileList);
+		QListWidgetItem* item = new QListWidgetItem(fields[i].getName(), ui.fieldsList);
 		item->setFlags(item->flags() | Qt::ItemIsEditable);
 	}
 }
@@ -103,7 +107,7 @@ void ListAutoSort::refreshFieldsInfo()
  */
 void ListAutoSort::slotFieldItemAdd()
 {
-	QListWidgetItem* item = new QListWidgetItem(QStringLiteral("新字段"), ui.titileList);
+	QListWidgetItem* item = new QListWidgetItem(QStringLiteral("新字段"), ui.fieldsList);
 	item->setFlags(item->flags() | Qt::ItemIsEditable);
 	fields.append(FieldItem(QStringLiteral("新字段"), ""));
 	writeFieldsInfo();
@@ -130,7 +134,7 @@ void ListAutoSort::slotPasteButtonClicked()
 
 void ListAutoSort::slotFieldItemMenu(QPoint p)
 {
-	QListWidgetItem* item = ui.titileList->itemAt(p);
+	QListWidgetItem* item = ui.fieldsList->itemAt(p);
 	if (item == NULL)
 		return;
 
@@ -143,19 +147,22 @@ void ListAutoSort::slotFieldItemMenu(QPoint p)
 
 void ListAutoSort::slotFieldItemDelete()
 {
-	QListWidgetItem* item = ui.titileList->currentItem();
+	QListWidgetItem* item = ui.fieldsList->currentItem();
 	if (item == NULL)
 		return;
 
-	int index = ui.titileList->currentIndex().row();
+	int index = ui.fieldsList->currentIndex().row();
 	if (index >= 0 && index < fields.size())
 		fields.removeAt(index);
 
-	ui.titileList->takeItem(index); // 不知道为什么removeWidgetItem无效
+	ui.fieldsList->takeItem(index); // 不知道为什么removeWidgetItem无效
 	delete item; // takeItem 需要手动 delete
 	writeFieldsInfo();
 }
 
+/**
+ * 双击修改文本结束
+ */
 void ListAutoSort::slotFieldItemTextModified(int row, QString text)
 {
 	if (row < 0 || row >= fields.size())
@@ -167,11 +174,28 @@ void ListAutoSort::slotFieldItemTextModified(int row, QString text)
 	writeFieldsInfo();
 }
 
+/**
+ * 修改正则表达式事件
+ */
 void ListAutoSort::slotFieldItemPatternModified(QString text)
 {
-	int index = ui.titileList->currentIndex;
+	QMessageBox::information(this, "asd", text);
+	int index = ui.fieldsList->currentIndex().row();
 	if (index < 0 || index >= fields.size())
 		return;
 	fields[index].setPattern(text);
 	writeFieldsInfo();
+}
+
+/**
+ * 字段列表位置改变
+ */
+void ListAutoSort::slotFieldItemRowChanged()
+{
+	int index = ui.fieldsList->currentIndex().row();
+	if (index < 0 || index >= fields.size())
+		return;
+	QString pat = fields[index].getPattern();
+	//QMessageBox::information(this, QString("%1").arg(index), pat);
+	ui.patternEdit->setText(pat);
 }

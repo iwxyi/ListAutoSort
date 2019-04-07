@@ -10,6 +10,7 @@
 #include <QMenu>
 #include <QPoint>
 #include <QAction>
+#include <QListWidgetItem>
 #include "FieldItem.h"
 #include "FileUtil.h"
 #include "Global.h"
@@ -41,6 +42,7 @@ public slots :
 	void slotFieldItemDelete();
 	void slotFieldItemTextModified(int row, QString text);
 	void slotFieldItemPatternModified(QString text);
+	void slotFieldItemRowChanged();
 
 signals:
 

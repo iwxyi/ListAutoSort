@@ -36,7 +36,7 @@ public:
     QPushButton *inputButton;
     QPushButton *pasteButton;
     QPushButton *addCol;
-    QListWidget *titileList;
+    QListWidget *fieldsList;
     QLineEdit *patternEdit;
     QMenuBar *menuBar;
     QMenu *menu;
@@ -68,9 +68,10 @@ public:
         addCol = new QPushButton(centralWidget);
         addCol->setObjectName(QStringLiteral("addCol"));
         addCol->setGeometry(QRect(160, 250, 61, 23));
-        titileList = new QListWidget(centralWidget);
-        titileList->setObjectName(QStringLiteral("titileList"));
-        titileList->setGeometry(QRect(10, 10, 221, 201));
+        fieldsList = new QListWidget(centralWidget);
+        fieldsList->setObjectName(QStringLiteral("fieldsList"));
+        fieldsList->setGeometry(QRect(10, 10, 221, 201));
+        fieldsList->setContextMenuPolicy(Qt::CustomContextMenu);
         patternEdit = new QLineEdit(centralWidget);
         patternEdit->setObjectName(QStringLiteral("patternEdit"));
         patternEdit->setGeometry(QRect(10, 220, 221, 20));
