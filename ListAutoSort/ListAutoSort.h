@@ -36,7 +36,7 @@ private:
 	void refreshFieldsInfo();
 
 	void smartAddMixture(QString str);
-	void setTableARow(int row, QString mixture, QList<FieldItem>fields);
+	bool setTableARow(int row, QString mixture, QList<FieldItem>fields);
 	QStringList analyzeMixture(QString mixture, QList<FieldItem>fields);
 
 public slots :

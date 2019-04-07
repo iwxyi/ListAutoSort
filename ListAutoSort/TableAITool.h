@@ -2,6 +2,8 @@
 #define TABLEAITOOL_H
 
 #include <QStringList>
+#include <QRegExp>
+#include <QMessageBox>
 #include "FieldItem.h"
 
 class TableAITool

@@ -57,13 +57,16 @@ void ListAutoSort::smartAddMixture(QString mixture)
 {
 	mixtures.append(mixture);
 	ui.tableWidget->setRowCount(mixtures.size()); // 设置行数（不包括标头行）
-	setTableARow(mixtures.size()-1, mixture, fields); // 设置行的内容
+	if (!setTableARow(mixtures.size() - 1, mixture, fields)) // 设置行的内容
+	{
+		ui.tableWidget->removeRow(ui.tableWidget->rowCount()-1);
+	}
 }
 
 /**
  * 在某一行，加上分析后的文本（添加/更新）
  */
-void ListAutoSort::setTableARow(int row, QString mixture, QList<FieldItem>fields)
+bool ListAutoSort::setTableARow(int row, QString mixture, QList<FieldItem>fields)
 {
 	QStringList result = analyzeMixture(mixture, fields);
 
@@ -79,7 +82,7 @@ void ListAutoSort::setTableARow(int row, QString mixture, QList<FieldItem>fields
 		}
 		QString all_msg = QString("Sorry, analyze failed, result is:%1").arg(list_str);
 		QMessageBox::information(this, QStringLiteral("识别失败"), all_msg);
-		return;
+		return false;
 	}
 
 	// 添加到表格的某一行
@@ -88,6 +91,8 @@ void ListAutoSort::setTableARow(int row, QString mixture, QList<FieldItem>fields
 		QTableWidgetItem* item = new QTableWidgetItem(result[i]);
 		ui.tableWidget->setItem(row, i, item);
 	}
+
+	return true;
 }
 
 /**
