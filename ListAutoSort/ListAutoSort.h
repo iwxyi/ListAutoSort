@@ -63,6 +63,9 @@ public slots :
 	void slotFieldItemMoveTop();
 	void slotFieldItemMoveBottom();
 
+	void slotHelpActionTriggered();
+	void slotAboutActionTriggered();
+
 signals:
 
 private:

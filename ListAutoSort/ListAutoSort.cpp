@@ -28,12 +28,17 @@ void ListAutoSort::initView()
 	connect(delegate, SIGNAL(signalTextModified(int, QString)), this, SLOT(slotFieldItemTextModified(int, QString)));
 
 	// 连接信号槽
+	connect(ui.resortAction, SIGNAL(triggered()), this, SLOT(slotResortButtonClicked()));
+	connect(ui.helpAction, SIGNAL(triggered()), this, SLOT(slotHelpActionTriggered()));
+	connect(ui.aboutAction, SIGNAL(triggered()), this, SLOT(slotAboutActionTriggered()));
+
 	connect(ui.addCol, SIGNAL(clicked()), this, SLOT(slotFieldItemAdd()));
 	connect(ui.inputButton, SIGNAL(clicked()), this, SLOT(slotInputButtonClicked()));
 	connect(ui.insertButton, SIGNAL(clicked()), this, SLOT(slotInsertButtonClicked()));
 	connect(ui.resortButton, SIGNAL(clicked()), this, SLOT(slotResortButtonClicked()));
 	connect(ui.pasteButton, SIGNAL(clicked()), this, SLOT(slotPasteButtonClicked()));
 	connect(ui.copyExcelButton, SIGNAL(clicked()), this, SLOT(slotExcelButtonClicked()));
+
 	connect(ui.fieldsList, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(slotFieldItemMenu(QPoint)));
 	//connect(ui.fieldsList, SIGNAL(itemChanged(QListWidgetItem *)), this, SLOT(slotFieldItemRowChanged())); // 无效
 	//connect(ui.fieldsList, SIGNAL(itemActivated(QListWidgetItem *)), this, SLOT(slotFieldItemRowChanged())); // 无效
@@ -544,3 +549,25 @@ QString ListAutoSort::getDefaultRegex(QString field)
 	return "";
 }
 
+/**
+* 帮助文本
+*/
+void ListAutoSort::slotHelpActionTriggered()
+{
+	QString str = QStringLiteral("步骤一：\n在左上方添加字段（表格标题），中间是字段的正则表达式。\n不会正则没关系，预设有姓名、手机、邮箱等。\n\n");;
+	str += QStringLiteral("步骤二：\n在左下方的输入框中粘贴文本，点击“添加”，文本中的散乱信息将自动分类到表格中，无需手动调整。\n更懒的方法是，直接点“识别剪贴板”。\n\n");
+	str += QStringLiteral("步骤三：\n点击右下角的“复制为Excel”，可在Excel中粘贴。\n\n后续或将支持更多骚操作，比如按顺序复制、网页表单填写等。");
+	QMessageBox::information(this, QStringLiteral("AutoSortList 教程"), str);
+}
+
+/**
+* 关于文本
+*/
+void ListAutoSort::slotAboutActionTriggered()
+{
+	QString str = QStringLiteral("作者：命燃芯乂\nQQ：482582886\n邮箱：wxy19980615@gmail.com\n\n");
+	str += QStringLiteral("为大幅度提高信息归类效率而专门开发的办公工具\n（懒呀~~）\n\n");
+	str += QStringLiteral("原创软件，允许免费传播，不作版权限制");
+
+	QMessageBox::information(this, QStringLiteral("关于 AutoSortList"), str);
+}
