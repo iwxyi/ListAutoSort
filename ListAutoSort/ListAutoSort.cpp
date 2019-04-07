@@ -12,7 +12,7 @@ ListAutoSort::ListAutoSort(QWidget *parent)
 
 	initView();
 	readFIeldsInfo();
-	initTable();
+	setTableHeader();
 }
 
 /**
@@ -41,7 +41,7 @@ void ListAutoSort::initView()
 /**
  * 初始化保存表格
  */
-void ListAutoSort::initTable()
+void ListAutoSort::setTableHeader()
 {
 	ui.tableWidget->setColumnCount(fields.size());
 	QStringList labels;
@@ -162,9 +162,15 @@ void ListAutoSort::refreshFieldsInfo()
  */
 void ListAutoSort::slotFieldItemAdd()
 {
+	// 创建字段列表
 	QListWidgetItem* item = new QListWidgetItem(QStringLiteral("新字段"), ui.fieldsList);
 	item->setFlags(item->flags() | Qt::ItemIsEditable);
+	ui.fieldsList->editItem(item);
 	fields.append(FieldItem(QStringLiteral("新字段"), ""));
+
+	setTableHeader();
+
+	// 保存
 	writeFieldsInfo();
 }
 
@@ -213,12 +219,16 @@ void ListAutoSort::slotFieldItemDelete()
 	if (item == NULL)
 		return;
 
+	// 删除字段列表
 	int index = ui.fieldsList->currentIndex().row();
 	if (index >= 0 && index < fields.size())
 		fields.removeAt(index);
 
 	ui.fieldsList->takeItem(index); // 不知道为什么removeWidgetItem无效
 	delete item; // takeItem 需要手动 delete
+
+	setTableHeader();
+
 	writeFieldsInfo();
 }
 
@@ -246,6 +256,10 @@ void ListAutoSort::slotFieldItemTextModified(int row, QString text)
 		return;
 
 	fields[row].setName(text);
+	ui.fieldsList->setCurrentRow(row);
+
+	setTableHeader();
+
 	writeFieldsInfo();
 }
 

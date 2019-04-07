@@ -68,12 +68,11 @@ void TableAITool::compareFields()
 		if (same[i] > -1 && same[i + 1] == -1)
 		{
 			int index = same[i]; // 对应字段的索引
-			qDebug() << QStringLiteral("匹配字段名：") << fields[index].getName();
+			qDebug() << QStringLiteral("匹配：") << fields[index].getName() << "  " << infos[i + 1];
 			if (capture[index]) // 重复匹配了……
 				continue;
 			result[index] = infos[i + 1];
 			capture[index] = true;
-			qDebug() << QStringLiteral("匹配的内容：") << "    " << infos[i + 1];
 		}
 	}
 

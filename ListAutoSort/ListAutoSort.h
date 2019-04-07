@@ -29,7 +29,7 @@ public:
 
 private:
 	void initView();
-	void initTable();
+	void setTableHeader();
 
 	void readFIeldsInfo();
 	void writeFieldsInfo();
