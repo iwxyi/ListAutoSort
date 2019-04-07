@@ -93,7 +93,7 @@
     <ClInclude Include="Defines.h">
       <Filter>Globals</Filter>
     </ClInclude>
-    <ClInclude Include="TitleItem.h">
+    <ClInclude Include="FieldItem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

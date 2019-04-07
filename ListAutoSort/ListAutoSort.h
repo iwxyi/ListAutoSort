@@ -10,7 +10,7 @@
 #include <QMenu>
 #include <QPoint>
 #include <QAction>
-#include "TitleItem.h"
+#include "FieldItem.h"
 #include "FileUtil.h"
 #include "Global.h"
 #include "StringUtil.h"
@@ -37,9 +37,9 @@ public slots :
 	void slotAddCol();
 	void slotInputButtonClicked();
 	void slotPasteButtonClicked();
-	void slotListItemMenu(QPoint p);
-	void slotDeleteListItem();
-	void slotTitleItemTextModified(int row, QString text);
+	void slotFieldItemMenu(QPoint p);
+	void slotFieldItemDelete();
+	void slotFieldItemTextModified(int row, QString text);
 
 signals:
 
@@ -47,5 +47,5 @@ private:
 	Ui::ListAutoSortClass ui;
 
 	QString savedPath;
-	QList<TitleItem> titles;
+	QList<FieldItem> fields;
 };

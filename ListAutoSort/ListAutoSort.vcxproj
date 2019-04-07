@@ -141,7 +141,7 @@
     <ClInclude Include="RuntimeInfo.h" />
     <ClInclude Include="Settings.h" />
     <ClInclude Include="StringUtil.h" />
-    <ClInclude Include="TitleItem.h" />
+    <ClInclude Include="FieldItem.h" />
     <ClInclude Include="USettings.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

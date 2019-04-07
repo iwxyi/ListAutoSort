@@ -2,16 +2,16 @@
 #include <QList>
 #include "StringUtil.h"
 
-class TitleItem
+class FieldItem
 {
 public:
-	TitleItem()
+	FieldItem()
 	{
 		name = "";
 		pattern = "";
 	}
 
-	TitleItem(QString n, QString p)
+	FieldItem(QString n, QString p)
 	{
 		name = n;
 		pattern = p;

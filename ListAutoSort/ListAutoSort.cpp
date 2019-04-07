@@ -22,12 +22,12 @@ void ListAutoSort::initView()
 	ui.titileList->setEditTriggers(QAbstractItemView::DoubleClicked);
 	ListItemDelegate* delegate = new ListItemDelegate(this);
 	ui.titileList->setItemDelegate(delegate);
-	connect(delegate, SIGNAL(signalTextModified(int, QString)), this, SLOT(slotTitleItemTextModified(int, QString)));
+	connect(delegate, SIGNAL(signalTextModified(int, QString)), this, SLOT(slotFieldItemTextModified(int, QString)));
 
 	connect(ui.addCol, SIGNAL(clicked()), this, SLOT(slotAddCol()));
 	connect(ui.inputButton, SIGNAL(clicked()), this, SLOT(slotInputButtonClicked()));
 	connect(ui.pasteButton, SIGNAL(clicked()), this, SLOT(slotPasteButtonClicked()));
-	connect(ui.titileList, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(slotListItemMenu(QPoint)));
+	connect(ui.titileList, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(slotFieldItemMenu(QPoint)));
 }
 
 /**
@@ -50,12 +50,12 @@ void ListAutoSort::smartAddInfo(QString str)
  */
 void ListAutoSort::writeInfoTitles()
 {
-	QString content = "ListAutoSort:";
+	QString content;
 
-	for (int i = 0; i < titles.size(); i++)
+	for (int i = 0; i < fields.size(); i++)
 	{
-		QString n = titles[i].getName();
-		QString p = titles[i].getPattern();
+		QString n = fields[i].getName();
+		QString p = fields[i].getPattern();
 		QString c = toXml(n, "name") + toXml(p, "pattern");
 		content += toXml(c, "field");
 	}
@@ -78,7 +78,7 @@ void ListAutoSort::readInfoTitles()
 	{
 		QString n = getXml(ts[i], "name");
 		QString p = getXml(ts[i], "pattern");
-		titles.append(TitleItem(n, p));
+		fields.append(FieldItem(n, p));
 	}
 
 	refreshInfoTitiles();
@@ -91,9 +91,9 @@ void ListAutoSort::refreshInfoTitiles()
 {
 	ui.titileList->clear();
 
-	for (int i = 0; i < titles.size(); i++)
+	for (int i = 0; i < fields.size(); i++)
 	{
-		QListWidgetItem* item = new QListWidgetItem(titles[i].getName(), ui.titileList);
+		QListWidgetItem* item = new QListWidgetItem(fields[i].getName(), ui.titileList);
 		item->setFlags(item->flags() | Qt::ItemIsEditable);
 	}
 }
@@ -105,7 +105,7 @@ void ListAutoSort::slotAddCol()
 {
 	QListWidgetItem* item = new QListWidgetItem(QStringLiteral("新字段"), ui.titileList);
 	item->setFlags(item->flags() | Qt::ItemIsEditable);
-	titles.append(TitleItem(QStringLiteral("新字段"), ""));
+	fields.append(FieldItem(QStringLiteral("新字段"), ""));
 	writeInfoTitles();
 }
 
@@ -128,7 +128,7 @@ void ListAutoSort::slotPasteButtonClicked()
 	smartAddInfo(str);
 }
 
-void ListAutoSort::slotListItemMenu(QPoint p)
+void ListAutoSort::slotFieldItemMenu(QPoint p)
 {
 	QListWidgetItem* item = ui.titileList->itemAt(p);
 	if (item == NULL)
@@ -137,32 +137,32 @@ void ListAutoSort::slotListItemMenu(QPoint p)
 	QMenu* menu = new QMenu(this);
 	QAction* deleteAction = new QAction(QStringLiteral("删除"), this);
 	menu->addAction(deleteAction);
-	connect(deleteAction, SIGNAL(triggered()), this, SLOT(slotDeleteListItem()));
+	connect(deleteAction, SIGNAL(triggered()), this, SLOT(slotFieldItemDelete()));
 	menu->exec(QCursor::pos());
 }
 
-void ListAutoSort::slotDeleteListItem()
+void ListAutoSort::slotFieldItemDelete()
 {
 	QListWidgetItem* item = ui.titileList->currentItem();
 	if (item == NULL)
 		return;
 
 	int index = ui.titileList->currentIndex().row();
-	if (index >= 0 && index < titles.size())
-		titles.removeAt(index);
+	if (index >= 0 && index < fields.size())
+		fields.removeAt(index);
 
 	ui.titileList->takeItem(index); // 不知道为什么removeWidgetItem无效
 	delete item; // takeItem 需要手动 delete
 	writeInfoTitles();
 }
 
-void ListAutoSort::slotTitleItemTextModified(int row, QString text)
+void ListAutoSort::slotFieldItemTextModified(int row, QString text)
 {
-	if (row < 0 || row >= titles.size())
+	if (row < 0 || row >= fields.size())
 		return;
-	if (titles[row].getName() == text)
+	if (fields[row].getName() == text)
 		return;
 
-	titles[row].setName(text);
+	fields[row].setName(text);
 	writeInfoTitles();
 }
