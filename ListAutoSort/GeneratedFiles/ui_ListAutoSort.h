@@ -36,6 +36,7 @@ public:
     QAction *resortAction;
     QAction *helpAction;
     QAction *aboutAction;
+    QAction *workspaceAction;
     QWidget *centralWidget;
     QHBoxLayout *horizontalLayout_2;
     QHBoxLayout *horizontalLayout;
@@ -77,6 +78,8 @@ public:
         helpAction->setObjectName(QStringLiteral("helpAction"));
         aboutAction = new QAction(ListAutoSortClass);
         aboutAction->setObjectName(QStringLiteral("aboutAction"));
+        workspaceAction = new QAction(ListAutoSortClass);
+        workspaceAction->setObjectName(QStringLiteral("workspaceAction"));
         centralWidget = new QWidget(ListAutoSortClass);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         horizontalLayout_2 = new QHBoxLayout(centralWidget);
@@ -220,6 +223,7 @@ public:
         menuBar->addAction(menu->menuAction());
         menuBar->addAction(menu_2->menuAction());
         menuBar->addAction(menu_3->menuAction());
+        menu->addAction(workspaceAction);
         menu_2->addAction(resortAction);
         menu_3->addAction(helpAction);
         menu_3->addAction(aboutAction);
@@ -233,8 +237,9 @@ public:
     {
         ListAutoSortClass->setWindowTitle(QApplication::translate("ListAutoSortClass", "ListAutoSort", nullptr));
         resortAction->setText(QApplication::translate("ListAutoSortClass", "\351\207\215\346\226\260\345\210\206\346\213\243", nullptr));
-        helpAction->setText(QApplication::translate("ListAutoSortClass", "\347\224\250\346\263\225", nullptr));
+        helpAction->setText(QApplication::translate("ListAutoSortClass", "\346\225\231\347\250\213", nullptr));
         aboutAction->setText(QApplication::translate("ListAutoSortClass", "\345\205\263\344\272\216", nullptr));
+        workspaceAction->setText(QApplication::translate("ListAutoSortClass", "\345\267\245\344\275\234\347\233\256\345\275\225", nullptr));
         addCol->setText(QApplication::translate("ListAutoSortClass", "\346\267\273\345\212\240\345\255\227\346\256\265", nullptr));
         inputButton->setText(QApplication::translate("ListAutoSortClass", "\346\267\273\345\212\240", nullptr));
         insertButton->setText(QApplication::translate("ListAutoSortClass", "\346\217\222\345\205\245", nullptr));

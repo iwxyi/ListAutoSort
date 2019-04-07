@@ -28,6 +28,7 @@ void ListAutoSort::initView()
 	connect(delegate, SIGNAL(signalTextModified(int, QString)), this, SLOT(slotFieldItemTextModified(int, QString)));
 
 	// Á¬½ÓÐÅºÅ²Û
+	connect(ui.workspaceAction, SIGNAL(triggered()), this, SLOT(slotWorkSpaceActionTriggered()));
 	connect(ui.resortAction, SIGNAL(triggered()), this, SLOT(slotResortButtonClicked()));
 	connect(ui.helpAction, SIGNAL(triggered()), this, SLOT(slotHelpActionTriggered()));
 	connect(ui.aboutAction, SIGNAL(triggered()), this, SLOT(slotAboutActionTriggered()));
@@ -456,6 +457,11 @@ void ListAutoSort::slotFieldItemMoveBottom()
 		return;
 
 	moveListItem(index, fields.size() - 1);
+}
+
+void ListAutoSort::slotWorkSpaceActionTriggered()
+{
+	QDesktopServices::openUrl(QUrl(rt->DATA_PATH));
 }
 
 /**

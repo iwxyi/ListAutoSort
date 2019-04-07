@@ -13,7 +13,7 @@
 #include <QListWidgetItem>
 #include <QTableWidgetItem>
 #include <QTableWidget>
-#include <QMap>
+#include <QDesktopServices>
 #include "FieldItem.h"
 #include "FileUtil.h"
 #include "Global.h"
@@ -63,6 +63,7 @@ public slots :
 	void slotFieldItemMoveTop();
 	void slotFieldItemMoveBottom();
 
+	void slotWorkSpaceActionTriggered();
 	void slotHelpActionTriggered();
 	void slotAboutActionTriggered();
 

@@ -198,6 +198,7 @@
     <property name="title">
      <string>文件</string>
     </property>
+    <addaction name="workspaceAction"/>
    </widget>
    <widget class="QMenu" name="menu_2">
     <property name="title">
@@ -232,12 +233,17 @@
   </action>
   <action name="helpAction">
    <property name="text">
-    <string>用法</string>
+    <string>教程</string>
    </property>
   </action>
   <action name="aboutAction">
    <property name="text">
     <string>关于</string>
+   </property>
+  </action>
+  <action name="workspaceAction">
+   <property name="text">
+    <string>工作目录</string>
    </property>
   </action>
  </widget>
