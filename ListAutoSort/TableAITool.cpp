@@ -121,7 +121,7 @@ void TableAITool::compareRegExp()
 		if (count == 1)
 		{
 			result[index] = infos[place];
-			qDebug() << QStringLiteral("正则匹配到：") << infos[place] << "    " << fields[index].getPattern();
+			qDebug() << QStringLiteral("正则匹配到：") << fields[index].getName() << "    " << infos[place] << "    " << fields[index].getPattern();
 			infos.removeAt(place);  // 匹配后删除
 			captured[index] = true; // 这个字段匹配了
 			index = 0;              // 从头开始计算

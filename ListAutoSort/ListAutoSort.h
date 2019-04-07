@@ -13,6 +13,7 @@
 #include <QListWidgetItem>
 #include <QTableWidgetItem>
 #include <QTableWidget>
+#include <QMap>
 #include "FieldItem.h"
 #include "FileUtil.h"
 #include "Global.h"
@@ -26,6 +27,7 @@ class ListAutoSort : public QMainWindow
 
 public:
 	ListAutoSort(QWidget *parent = Q_NULLPTR);
+	QString getDefaultRegex(QString field);
 
 private:
 	void initView();
@@ -67,4 +69,6 @@ private:
 	QString savedPath;
 	QList<FieldItem> fields;
 	QStringList mixtures;
+
+	QMap<QString, QString>defaultRegexp;
 };

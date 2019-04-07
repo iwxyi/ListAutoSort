@@ -393,6 +393,14 @@ void ListAutoSort::slotFieldItemTextModified(int row, QString text)
 	fields[row].setName(text);
 	ui.fieldsList->setCurrentRow(row);
 
+	if (fields[row].getPattern().isEmpty())
+	{
+		QString def_reg = getDefaultRegex(text);
+		fields[row].setPattern(def_reg);
+		if (ui.fieldsList->currentIndex().row() == row)
+			ui.patternEdit->setText(def_reg);
+	}
+
 	//setTableHeader();
 	QTableWidgetItem* item = ui.tableWidget->item(0, row);
 	if (item == NULL) // 实测是NULL……
@@ -419,3 +427,35 @@ void ListAutoSort::slotFieldItemPatternModified(QString text)
 	fields[index].setPattern(text);
 	writeFieldsInfo();
 }
+
+/**
+ * 获取特定字段名的正则表达式
+ */
+QString ListAutoSort::getDefaultRegex(QString field)
+{
+	if (field == QStringLiteral("姓名"))
+		return "^[^\\x00-\\xff]{2,4}$";
+	if (field == QStringLiteral("性别"))
+		return "[01男女]";
+	if (field == QStringLiteral("年龄"))
+		return "^\\d{1,2}$";
+	if (field == QStringLiteral("班级"))
+		return "^[^\\x00-\\xff]{2,15}\\d{2,4}班级?$";
+	if (field == QStringLiteral("手机") || field == QStringLiteral("手机号"))
+		return "^1\\d{10}$";
+	if (field == QStringLiteral("邮箱"))
+		return "^[A-Za-z\\d]+([-_.][A-Za-z\\d]+)*@([A-Za-z\\d]+[-.])+[A-Za-z\\d]{2,4}$";
+	if (field == QStringLiteral("学号"))
+		return "^20\\d{10,11}$";
+	if (field == QStringLiteral("身份证"))
+		return "^\\d{17}.$";
+	if (field == QStringLiteral("专业"))
+		return "^[^\\x00-\\xff]{2,15}$";
+	if (field == QStringLiteral("学校") || field == QStringLiteral("大学"))
+		return "^[^\\x00-\\xff]{2,10}(大学|学校|学院)$";
+	if (field == QStringLiteral("年级"))
+		return "(小学|初中?|高中?|大学?|研)(一二三四)(年级)?";
+
+	return "";
+}
+
