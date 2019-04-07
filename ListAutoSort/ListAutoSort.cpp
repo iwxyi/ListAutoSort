@@ -9,7 +9,7 @@ ListAutoSort::ListAutoSort(QWidget *parent)
 	us = new USettings(rt->DATA_PATH + "settings.ini");
 	savedPath = rt->DATA_PATH + "fields.txt";
 
-	readInfoTitles();
+	readFIeldsInfo();
 	initView();
 	initTable();;
 
@@ -24,7 +24,7 @@ void ListAutoSort::initView()
 	ui.titileList->setItemDelegate(delegate);
 	connect(delegate, SIGNAL(signalTextModified(int, QString)), this, SLOT(slotFieldItemTextModified(int, QString)));
 
-	connect(ui.addCol, SIGNAL(clicked()), this, SLOT(slotAddCol()));
+	connect(ui.addCol, SIGNAL(clicked()), this, SLOT(slotFieldItemAdd()));
 	connect(ui.inputButton, SIGNAL(clicked()), this, SLOT(slotInputButtonClicked()));
 	connect(ui.pasteButton, SIGNAL(clicked()), this, SLOT(slotPasteButtonClicked()));
 	connect(ui.titileList, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(slotFieldItemMenu(QPoint)));
@@ -40,7 +40,7 @@ void ListAutoSort::initTable()
 /**
  * 从一段话中智能分辨不同的信息
  */
-void ListAutoSort::smartAddInfo(QString str)
+void ListAutoSort::smartAddMixture(QString str)
 {
 	QMessageBox::information(this, QStringLiteral("分析"), str);
 }
@@ -48,7 +48,7 @@ void ListAutoSort::smartAddInfo(QString str)
 /*
  * 从保存的文件中读取
  */
-void ListAutoSort::writeInfoTitles()
+void ListAutoSort::writeFieldsInfo()
 {
 	QString content;
 
@@ -66,7 +66,7 @@ void ListAutoSort::writeInfoTitles()
 /**
  * 保存到文件之中
  */
-void ListAutoSort::readInfoTitles()
+void ListAutoSort::readFIeldsInfo()
 {
 	if (!isFileExist(savedPath))
 		return;
@@ -81,13 +81,13 @@ void ListAutoSort::readInfoTitles()
 		fields.append(FieldItem(n, p));
 	}
 
-	refreshInfoTitiles();
+	refreshFieldsInfo();
 }
 
 /**
  * 做了更改之后刷新列表
  */
-void ListAutoSort::refreshInfoTitiles()
+void ListAutoSort::refreshFieldsInfo()
 {
 	ui.titileList->clear();
 
@@ -101,12 +101,12 @@ void ListAutoSort::refreshInfoTitiles()
 /**
  * TableVIew添加一列，后续可以编辑
  */
-void ListAutoSort::slotAddCol()
+void ListAutoSort::slotFieldItemAdd()
 {
 	QListWidgetItem* item = new QListWidgetItem(QStringLiteral("新字段"), ui.titileList);
 	item->setFlags(item->flags() | Qt::ItemIsEditable);
 	fields.append(FieldItem(QStringLiteral("新字段"), ""));
-	writeInfoTitles();
+	writeFieldsInfo();
 }
 
 /**
@@ -115,7 +115,7 @@ void ListAutoSort::slotAddCol()
 void ListAutoSort::slotInputButtonClicked()
 {
 	QString str = ui.inputEdit->toPlainText();
-	smartAddInfo(str);
+	smartAddMixture(str);
 }
 
 /**
@@ -125,7 +125,7 @@ void ListAutoSort::slotPasteButtonClicked()
 {
 	const QClipboard* clipboard = QApplication::clipboard();
 	QString str = clipboard->text();
-	smartAddInfo(str);
+	smartAddMixture(str);
 }
 
 void ListAutoSort::slotFieldItemMenu(QPoint p)
@@ -153,7 +153,7 @@ void ListAutoSort::slotFieldItemDelete()
 
 	ui.titileList->takeItem(index); // 不知道为什么removeWidgetItem无效
 	delete item; // takeItem 需要手动 delete
-	writeInfoTitles();
+	writeFieldsInfo();
 }
 
 void ListAutoSort::slotFieldItemTextModified(int row, QString text)
@@ -164,5 +164,14 @@ void ListAutoSort::slotFieldItemTextModified(int row, QString text)
 		return;
 
 	fields[row].setName(text);
-	writeInfoTitles();
+	writeFieldsInfo();
+}
+
+void ListAutoSort::slotFieldItemPatternModified(QString text)
+{
+	int index = ui.titileList->currentIndex;
+	if (index < 0 || index >= fields.size())
+		return;
+	fields[index].setPattern(text);
+	writeFieldsInfo();
 }

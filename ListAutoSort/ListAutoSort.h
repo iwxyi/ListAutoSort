@@ -27,19 +27,20 @@ private:
 	void initView();
 	void initTable();
 
-	void smartAddInfo(QString str);
+	void smartAddMixture(QString str);
 
-	void readInfoTitles();
-	void writeInfoTitles();
-	void refreshInfoTitiles();
+	void readFIeldsInfo();
+	void writeFieldsInfo();
+	void refreshFieldsInfo();
 
 public slots :
-	void slotAddCol();
 	void slotInputButtonClicked();
 	void slotPasteButtonClicked();
+	void slotFieldItemAdd();
 	void slotFieldItemMenu(QPoint p);
 	void slotFieldItemDelete();
 	void slotFieldItemTextModified(int row, QString text);
+	void slotFieldItemPatternModified(QString text);
 
 signals:
 
