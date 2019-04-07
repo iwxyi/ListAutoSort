@@ -31,6 +31,7 @@ void ListAutoSort::initView()
 	connect(ui.addCol, SIGNAL(clicked()), this, SLOT(slotFieldItemAdd()));
 	connect(ui.inputButton, SIGNAL(clicked()), this, SLOT(slotInputButtonClicked()));
 	connect(ui.insertButton, SIGNAL(clicked()), this, SLOT(slotInsertButtonClicked()));
+	connect(ui.resortButton, SIGNAL(clicked()), this, SLOT(slotResortButtonClicked()));
 	connect(ui.pasteButton, SIGNAL(clicked()), this, SLOT(slotPasteButtonClicked()));
 	connect(ui.copyExcelButton, SIGNAL(clicked()), this, SLOT(slotExcelButtonClicked()));
 	connect(ui.fieldsList, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(slotFieldItemMenu(QPoint)));
@@ -272,6 +273,23 @@ void ListAutoSort::slotPasteButtonClicked()
 	QString str = clipboard->text();
 	ui.inputEdit->setPlainText(str);
 	slotInputButtonClicked();
+}
+
+/**
+ * 全部信息重新分类（丢弃所有的修改）
+ * 在修改字段后适用
+ */
+void ListAutoSort::slotResortButtonClicked()
+{
+	if (ui.tableWidget->rowCount() == 0) return;
+	QMessageBox::StandardButton reply =
+		QMessageBox::question(this, QStringLiteral("提示"),
+			QStringLiteral("请确认全部重新分拣？\n之前所做的单元格修改（如果有的话）都将取消"),
+			QMessageBox::Yes | QMessageBox::Cancel);
+	if (reply != QMessageBox::Yes)
+		return;
+	for (int i = 0; i < mixtures.size(); i++)
+		setTableARow(i, mixtures[i], fields);
 }
 
 /**

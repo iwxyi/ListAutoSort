@@ -47,6 +47,7 @@ public slots :
 	void slotInputButtonClicked();
 	void slotInsertButtonClicked();
 	void slotPasteButtonClicked();
+	void slotResortButtonClicked();
 	void slotExcelButtonClicked();
 
 	void slotFieldItemAdd();

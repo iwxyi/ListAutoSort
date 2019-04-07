@@ -53,6 +53,7 @@ public:
     QVBoxLayout *verticalLayout;
     QTableWidget *tableWidget;
     QHBoxLayout *horizontalLayout_5;
+    QPushButton *resortButton;
     QSpacerItem *horizontalSpacer_5;
     QPushButton *copyExcelButton;
     QMenuBar *menuBar;
@@ -165,6 +166,11 @@ public:
         horizontalLayout_5->setSpacing(6);
         horizontalLayout_5->setObjectName(QStringLiteral("horizontalLayout_5"));
         horizontalLayout_5->setContentsMargins(-1, 0, -1, -1);
+        resortButton = new QPushButton(centralWidget);
+        resortButton->setObjectName(QStringLiteral("resortButton"));
+
+        horizontalLayout_5->addWidget(resortButton);
+
         horizontalSpacer_5 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         horizontalLayout_5->addItem(horizontalSpacer_5);
@@ -222,6 +228,7 @@ public:
         inputButton->setText(QApplication::translate("ListAutoSortClass", "\346\267\273\345\212\240", nullptr));
         insertButton->setText(QApplication::translate("ListAutoSortClass", "\346\217\222\345\205\245", nullptr));
         pasteButton->setText(QApplication::translate("ListAutoSortClass", "\350\257\206\345\210\253\345\211\252\350\264\264\346\235\277", nullptr));
+        resortButton->setText(QApplication::translate("ListAutoSortClass", "\351\207\215\346\226\260\345\210\206\346\213\243", nullptr));
         copyExcelButton->setText(QApplication::translate("ListAutoSortClass", "\345\244\215\345\210\266\344\270\272Excel", nullptr));
         menu->setTitle(QApplication::translate("ListAutoSortClass", "\346\226\207\344\273\266", nullptr));
         menu_2->setTitle(QApplication::translate("ListAutoSortClass", "\347\274\226\350\276\221", nullptr));
