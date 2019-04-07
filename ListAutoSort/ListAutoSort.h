@@ -37,7 +37,6 @@ private:
 	void writeFieldsInfo();
 	void refreshFieldsInfo();
 
-	void smartAddMixture(QString str);
 	bool setTableARow(int row, QString mixture, QList<FieldItem>fields);
 	QStringList analyzeMixture(QString mixture, QList<FieldItem>fields);
 
@@ -46,6 +45,7 @@ private:
 
 public slots :
 	void slotInputButtonClicked();
+	void slotInsertButtonClicked();
 	void slotPasteButtonClicked();
 	void slotExcelButtonClicked();
 

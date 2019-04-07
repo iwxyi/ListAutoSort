@@ -30,6 +30,7 @@ void ListAutoSort::initView()
 	// 连接信号槽
 	connect(ui.addCol, SIGNAL(clicked()), this, SLOT(slotFieldItemAdd()));
 	connect(ui.inputButton, SIGNAL(clicked()), this, SLOT(slotInputButtonClicked()));
+	connect(ui.insertButton, SIGNAL(clicked()), this, SLOT(slotInsertButtonClicked()));
 	connect(ui.pasteButton, SIGNAL(clicked()), this, SLOT(slotPasteButtonClicked()));
 	connect(ui.copyExcelButton, SIGNAL(clicked()), this, SLOT(slotExcelButtonClicked()));
 	connect(ui.fieldsList, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(slotFieldItemMenu(QPoint)));
@@ -49,19 +50,6 @@ void ListAutoSort::setTableHeader()
 	for (int i = 0; i < fields.size(); i++)
 		labels.append(fields[i].getName());
 	ui.tableWidget->setHorizontalHeaderLabels(labels);
-}
-
-/**
- * 从一段话中智能分辨不同的信息
- */
-void ListAutoSort::smartAddMixture(QString mixture)
-{
-	mixtures.append(mixture);
-	ui.tableWidget->setRowCount(mixtures.size()); // 设置行数（不包括标头行）
-	if (!setTableARow(mixtures.size() - 1, mixture, fields)) // 设置行的内容
-	{
-		ui.tableWidget->removeRow(ui.tableWidget->rowCount()-1);
-	}
 }
 
 /**
@@ -117,6 +105,7 @@ void ListAutoSort::moveListItem(int from, int to)
 
 	// 移动 QList
 	fields.move(from, to);
+	writeFieldsInfo(); // 保存位置修改
 
 	// 移动 QListWidget
 	ui.fieldsList->insertItem(to, new QListWidgetItem(ui.fieldsList->item(from)->text()));
@@ -231,9 +220,47 @@ void ListAutoSort::slotFieldItemAdd()
  */
 void ListAutoSort::slotInputButtonClicked()
 {
-	QString str = ui.inputEdit->toPlainText();
-	smartAddMixture(str);
-	ui.inputEdit->setPlainText("");
+	QString mixture = ui.inputEdit->toPlainText();
+	if (mixture.isEmpty()) return;
+
+	mixtures.append(mixture);
+	ui.tableWidget->setRowCount(mixtures.size()); // 设置行数（不包括标头行）
+	if (setTableARow(mixtures.size() - 1, mixture, fields)) // 设置行的内容
+	{
+		ui.inputEdit->setPlainText("");
+		ui.tableWidget->setCurrentCell(ui.tableWidget->rowCount() - 1, 0);
+	}
+	else // 设置失败，取消修改
+	{
+		ui.tableWidget->removeRow(ui.tableWidget->rowCount() - 1);
+		mixture.remove(mixture.size());
+	}
+}
+
+/**
+ * 插入 ui.inputEdit 中的内容到表格中
+ */
+void ListAutoSort::slotInsertButtonClicked()
+{
+	int currentIndex = ui.tableWidget->currentRow();
+	if (currentIndex < 0)
+		return;
+
+	QString mixture = ui.inputEdit->toPlainText();
+	if (mixture.isEmpty()) return;
+
+	mixtures.insert(currentIndex, mixture);
+	ui.tableWidget->insertRow(currentIndex); // 通过插入一行来设置行数（不包括标头行）
+	if (setTableARow(currentIndex, mixture, fields)) // 设置行的内容
+	{
+		ui.inputEdit->setPlainText("");
+		ui.tableWidget->setCurrentCell(currentIndex, 0);
+	}
+	else // 设置失败，取消修改
+	{
+		ui.tableWidget->removeRow(ui.tableWidget->rowCount() - 1);
+		mixture.remove(mixture.size());
+	}
 }
 
 /**
@@ -243,7 +270,8 @@ void ListAutoSort::slotPasteButtonClicked()
 {
 	const QClipboard* clipboard = QApplication::clipboard();
 	QString str = clipboard->text();
-	smartAddMixture(str);
+	ui.inputEdit->setPlainText(str);
+	slotInputButtonClicked();
 }
 
 /**
@@ -359,7 +387,6 @@ void ListAutoSort::slotFieldItemMoveUp()
 	if (index == 0)
 		return;
 
-	//fields.move(index, index - 1);
 	moveListItem(index, index - 1);
 }
 
@@ -375,7 +402,6 @@ void ListAutoSort::slotFieldItemMoveDown()
 	if (index >= fields.size()-1)
 		return;
 
-	//fields.move(index, index + 1);
 	moveListItem(index, index + 1);
 }
 
@@ -391,7 +417,6 @@ void ListAutoSort::slotFieldItemMoveTop()
 	if (index == 0)
 		return;
 
-	//fields.move(index, 0);
 	moveListItem(index, 0);
 }
 
@@ -407,7 +432,6 @@ void ListAutoSort::slotFieldItemMoveBottom()
 	if (index >= fields.size()-1)
 		return;
 
-	//fields.move(index, fields.size() - 1);
 	moveListItem(index, fields.size() - 1);
 }
 
@@ -420,7 +444,6 @@ void ListAutoSort::slotFieldItemRowChanged()
 	if (index < 0 || index >= fields.size())
 		return;
 	QString pat = fields[index].getPattern();
-	//QMessageBox::information(this, QString("%1").arg(index), pat);
 	ui.patternEdit->setText(pat);
 }
 

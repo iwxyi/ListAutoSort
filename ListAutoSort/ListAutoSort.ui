@@ -89,7 +89,14 @@
           <item>
            <widget class="QPushButton" name="inputButton">
             <property name="text">
-             <string>智能分析</string>
+             <string>添加</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="insertButton">
+            <property name="text">
+             <string>插入</string>
             </property>
            </widget>
           </item>
