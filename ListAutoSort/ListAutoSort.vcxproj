@@ -119,6 +119,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="RuntimeInfo.cpp" />
     <ClCompile Include="StringUtil.cpp" />
+    <ClCompile Include="TableAITool.cpp" />
     <ClCompile Include="USettings.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -142,6 +143,7 @@
     <ClInclude Include="Settings.h" />
     <ClInclude Include="StringUtil.h" />
     <ClInclude Include="FieldItem.h" />
+    <ClInclude Include="TableAITool.h" />
     <ClInclude Include="USettings.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

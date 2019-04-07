@@ -1,3 +1,6 @@
+#ifndef FIELDITEM_H
+#define FIELDITEM_H
+
 #include <QString>
 #include <QList>
 #include "StringUtil.h"
@@ -50,3 +53,5 @@ public:
 	QString name;
 	QString pattern;
 };
+
+#endif

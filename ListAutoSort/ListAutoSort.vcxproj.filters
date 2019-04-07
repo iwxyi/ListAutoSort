@@ -60,6 +60,9 @@
     <ClCompile Include="ListItemDelegate.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="TableAITool.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="ListAutoSort.ui">
@@ -94,6 +97,9 @@
       <Filter>Globals</Filter>
     </ClInclude>
     <ClInclude Include="FieldItem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TableAITool.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
