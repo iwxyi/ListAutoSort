@@ -161,6 +161,19 @@ void ListAutoSort::slotFieldItemDelete()
 }
 
 /**
+ * 字段列表位置改变
+ */
+void ListAutoSort::slotFieldItemRowChanged()
+{
+	int index = ui.fieldsList->currentIndex().row();
+	if (index < 0 || index >= fields.size())
+		return;
+	QString pat = fields[index].getPattern();
+	//QMessageBox::information(this, QString("%1").arg(index), pat);
+	ui.patternEdit->setText(pat);
+}
+
+/**
  * 双击修改文本结束
  */
 void ListAutoSort::slotFieldItemTextModified(int row, QString text)
@@ -179,23 +192,9 @@ void ListAutoSort::slotFieldItemTextModified(int row, QString text)
  */
 void ListAutoSort::slotFieldItemPatternModified(QString text)
 {
-	QMessageBox::information(this, "asd", text);
 	int index = ui.fieldsList->currentIndex().row();
 	if (index < 0 || index >= fields.size())
 		return;
 	fields[index].setPattern(text);
 	writeFieldsInfo();
-}
-
-/**
- * 字段列表位置改变
- */
-void ListAutoSort::slotFieldItemRowChanged()
-{
-	int index = ui.fieldsList->currentIndex().row();
-	if (index < 0 || index >= fields.size())
-		return;
-	QString pat = fields[index].getPattern();
-	//QMessageBox::information(this, QString("%1").arg(index), pat);
-	ui.patternEdit->setText(pat);
 }

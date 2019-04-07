@@ -33,6 +33,7 @@ public:
 			p = "^" + p;
 		if (!p.endsWith("$"))
 			p = p + "$";
+		pattern = p;
 	}
 
 	QString getPattern()

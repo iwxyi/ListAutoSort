@@ -40,9 +40,9 @@ public slots :
 	void slotFieldItemAdd();
 	void slotFieldItemMenu(QPoint p);
 	void slotFieldItemDelete();
+	void slotFieldItemRowChanged();
 	void slotFieldItemTextModified(int row, QString text);
 	void slotFieldItemPatternModified(QString text);
-	void slotFieldItemRowChanged();
 
 signals:
 
