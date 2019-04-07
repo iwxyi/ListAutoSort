@@ -30,11 +30,13 @@ private:
 	void initView();
 	void initTable();
 
-	void smartAddMixture(QString str);
-
 	void readFIeldsInfo();
 	void writeFieldsInfo();
 	void refreshFieldsInfo();
+
+	void smartAddMixture(QString str);
+	void setTableARow(int row, QString mixture, QList<FieldItem>fields);
+	QStringList analyzeMixture(QString mixture, QList<FieldItem>fields);
 
 public slots :
 	void slotInputButtonClicked();

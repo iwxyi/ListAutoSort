@@ -52,9 +52,48 @@ void ListAutoSort::initTable()
 /**
  * 从一段话中智能分辨不同的信息
  */
-void ListAutoSort::smartAddMixture(QString str)
+void ListAutoSort::smartAddMixture(QString mixture)
 {
-	mixtures.append(str);
+	mixtures.append(mixture);
+
+	setTableARow(fields.size(), mixture, fields);
+}
+
+/**
+ * 在某一行，加上分析后的文本
+ */
+void ListAutoSort::setTableARow(int row, QString mixture, QList<FieldItem>fields)
+{
+	QStringList result = analyzeMixture(mixture, fields);
+
+	// 识别失败
+	if (result.size() != fields.size())
+	{
+		QString list_str = "";
+		for (int i = 0; i < result.size(); i++)
+		{
+			if (i > 0)
+				list_str += ", ";
+			list_str += result[i];
+		}
+		QString all_msg = QString("Sorry, analyze failed, result is:%1").arg(list_str);
+		QMessageBox::information(this, QStringLiteral("识别失败"), all_msg);
+		return;
+	}
+
+	// 添加到表格的每一行
+	for (int i = 0; i < result.size(); i++)
+	{
+		QTableWidgetItem* item = new QTableWidgetItem(result[i]);
+		ui.tableWidget->setItem(row, i, item);
+	}
+}
+
+QStringList ListAutoSort::analyzeMixture(QString mixture, QList<FieldItem> fields)
+{
+
+
+	return QStringList();
 }
 
 /*
