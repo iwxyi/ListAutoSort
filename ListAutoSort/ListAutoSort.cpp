@@ -6,13 +6,14 @@ ListAutoSort::ListAutoSort(QWidget *parent)
 	ui.setupUi(this);
 
 	rt = new RuntimeInfo();
-	us = new USettings(rt->DATA_PATH+"settings.ini");
+	us = new USettings(rt->DATA_PATH + "settings.ini");
+	savedPath = rt->DATA_PATH + "fields.txt";
 
-	initView();
-	initTable();
 	readInfoTitles();
-}
+	initView();
+	initTable();;
 
+}
 /**
  * 初始化控件与连接
  */
@@ -34,7 +35,6 @@ void ListAutoSort::initView()
  */
 void ListAutoSort::initTable()
 {
-
 }
 
 /**
@@ -50,19 +50,17 @@ void ListAutoSort::smartAddInfo(QString str)
  */
 void ListAutoSort::writeInfoTitles()
 {
-	QString savedPath = rt->DATA_PATH+"titles.txt";
-	QString content;
+	QString content = "ListAutoSort:";
 
 	for (int i = 0; i < titles.size(); i++)
 	{
 		QString n = titles[i].getName();
 		QString p = titles[i].getPattern();
 		QString c = toXml(n, "name") + toXml(p, "pattern");
-		content += toXml(c, "title");
+		content += toXml(c, "field");
 	}
 
 	writeTextFile(savedPath, content);
-	//QMessageBox::information(this, "qwe", content);
 }
 
 /**
@@ -70,17 +68,11 @@ void ListAutoSort::writeInfoTitles()
  */
 void ListAutoSort::readInfoTitles()
 {
-	QString savedPath = rt->DATA_PATH+"titles.txt";
 	if (!isFileExist(savedPath))
 		return;
 	QString content = readTextFile(savedPath);
-	{
-		QFile file(savedPath);
-		qint64 size = file.size();
-		QMessageBox::information(this, "content", QString("%1--%2").arg(size).arg(content));
-	}
-	//QMessageBox::information(this, "content", content);
-	QStringList ts = getXmls(content, "titles");
+
+	QStringList ts = getXmls(content, "field");
 
 	for (int i = 0; i < ts.size(); i++)
 	{

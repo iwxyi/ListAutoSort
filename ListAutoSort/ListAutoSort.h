@@ -46,5 +46,6 @@ signals:
 private:
 	Ui::ListAutoSortClass ui;
 
+	QString savedPath;
 	QList<TitleItem> titles;
 };
