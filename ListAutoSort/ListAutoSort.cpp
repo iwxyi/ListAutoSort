@@ -76,8 +76,7 @@ bool ListAutoSort::setTableARow(int row, QString mixture, QList<FieldItem>fields
 		QString list_str = "";
 		for (int i = 0; i < result.size(); i++)
 		{
-			if (i > 0)
-				list_str += ", ";
+			if (i > 0) list_str += ", ";
 			list_str += result[i];
 		}
 		QString all_msg = QString("Sorry, analyze failed, result is:%1").arg(list_str);
