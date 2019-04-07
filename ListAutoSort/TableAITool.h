@@ -9,8 +9,24 @@
 class TableAITool
 {
 public:
-	static QStringList analyzeMixture(QString mixture, QList<FieldItem>fields);
+	TableAITool(QString m, QList<FieldItem>f);
+	QStringList getResult();
 
+private:
+	void start();
+	void init();
+	void filter();
+	void compareFields();
+	void compareRegExp();
+	void compareMissing();
+
+private:
+	QString mixture;
+	QList<FieldItem>fields;
+	int count;
+	QStringList result;
+	QList<bool>capture;
+	QStringList infos;
 };
 
 #endif

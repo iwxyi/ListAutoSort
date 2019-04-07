@@ -100,7 +100,9 @@ bool ListAutoSort::setTableARow(int row, QString mixture, QList<FieldItem>fields
  */
 QStringList ListAutoSort::analyzeMixture(QString mixture, QList<FieldItem> fields)
 {
-	return TableAITool::analyzeMixture(mixture, fields);
+	TableAITool ai(mixture, fields);
+
+	return ai.getResult();
 }
 
 /*
