@@ -28,11 +28,11 @@
       <Extensions>moc;h;cpp</Extensions>
       <SourceControlFiles>False</SourceControlFiles>
     </Filter>
-    <Filter Include="Utils">
-      <UniqueIdentifier>{6657d008-120d-4a70-a4b2-348831822910}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Globals">
-      <UniqueIdentifier>{c019512a-48bd-463e-9e29-f0270bcc69c6}</UniqueIdentifier>
+      <UniqueIdentifier>{88ec9214-c4ce-469a-82e3-71caf5999044}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utils">
+      <UniqueIdentifier>{2552a667-2d25-44bc-8f73-614803b814aa}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -42,27 +42,35 @@
     <ClCompile Include="ListAutoSort.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="StringUtil.cpp">
-      <Filter>Utils</Filter>
-    </ClCompile>
-    <ClCompile Include="FileUtil.cpp">
-      <Filter>Utils</Filter>
-    </ClCompile>
-    <ClCompile Include="Global.cpp">
+    <ClCompile Include="F:\Cloud\Projects\ListAutoSort\ListAutoSort\Global.cpp">
       <Filter>Globals</Filter>
     </ClCompile>
-    <ClCompile Include="USettings.cpp">
+    <ClCompile Include="F:\Cloud\Projects\ListAutoSort\ListAutoSort\RuntimeInfo.cpp">
       <Filter>Globals</Filter>
     </ClCompile>
-    <ClCompile Include="RuntimeInfo.cpp">
+    <ClCompile Include="F:\Cloud\Projects\ListAutoSort\ListAutoSort\USettings.cpp">
       <Filter>Globals</Filter>
     </ClCompile>
-    <ClCompile Include="ListItemDelegate.cpp">
+    <ClCompile Include="F:\Cloud\Projects\ListAutoSort\ListAutoSort\ListItemDelegate.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TableAITool.cpp">
+    <ClCompile Include="F:\Cloud\Projects\ListAutoSort\ListAutoSort\TableAITool.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="F:\Cloud\Projects\ListAutoSort\ListAutoSort\FileUtil.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="F:\Cloud\Projects\ListAutoSort\ListAutoSort\StringUtil.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="ListAutoSort.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="F:\Cloud\Projects\ListAutoSort\ListAutoSort\ListItemDelegate.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="ListAutoSort.ui">
@@ -75,40 +83,32 @@
     </QtRcc>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="StringUtil.h">
+    <ClInclude Include="F:\Cloud\Projects\ListAutoSort\ListAutoSort\USettings.h">
+      <Filter>Globals</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Cloud\Projects\ListAutoSort\ListAutoSort\Defines.h">
+      <Filter>Globals</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Cloud\Projects\ListAutoSort\ListAutoSort\Global.h">
+      <Filter>Globals</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Cloud\Projects\ListAutoSort\ListAutoSort\RuntimeInfo.h">
+      <Filter>Globals</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Cloud\Projects\ListAutoSort\ListAutoSort\TableAITool.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Cloud\Projects\ListAutoSort\ListAutoSort\FieldItem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="F:\Cloud\Projects\ListAutoSort\ListAutoSort\StringUtil.h">
       <Filter>Utils</Filter>
     </ClInclude>
-    <ClInclude Include="Settings.h">
+    <ClInclude Include="F:\Cloud\Projects\ListAutoSort\ListAutoSort\FileUtil.h">
       <Filter>Utils</Filter>
     </ClInclude>
-    <ClInclude Include="FileUtil.h">
+    <ClInclude Include="F:\Cloud\Projects\ListAutoSort\ListAutoSort\Settings.h">
       <Filter>Utils</Filter>
     </ClInclude>
-    <ClInclude Include="RuntimeInfo.h">
-      <Filter>Globals</Filter>
-    </ClInclude>
-    <ClInclude Include="Global.h">
-      <Filter>Globals</Filter>
-    </ClInclude>
-    <ClInclude Include="USettings.h">
-      <Filter>Globals</Filter>
-    </ClInclude>
-    <ClInclude Include="Defines.h">
-      <Filter>Globals</Filter>
-    </ClInclude>
-    <ClInclude Include="FieldItem.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TableAITool.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <QtMoc Include="ListAutoSort.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="ListItemDelegate.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
   </ItemGroup>
 </Project>

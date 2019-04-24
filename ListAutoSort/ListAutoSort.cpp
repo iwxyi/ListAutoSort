@@ -16,13 +16,13 @@ ListAutoSort::ListAutoSort(QWidget *parent)
 }
 
 /**
- * 初始化控件与连接
- */
+* 初始化控件与连接
+*/
 void ListAutoSort::initView()
 {
 	ui.fieldsList->setEditTriggers(QAbstractItemView::DoubleClicked); // 允许双击编辑
 
-	// 设置代理，处理双击编辑结束事件
+																	  // 设置代理，处理双击编辑结束事件
 	ListItemDelegate* delegate = new ListItemDelegate(this);
 	ui.fieldsList->setItemDelegate(delegate);
 	connect(delegate, SIGNAL(signalTextModified(int, QString)), this, SLOT(slotFieldItemTextModified(int, QString)));
@@ -48,8 +48,8 @@ void ListAutoSort::initView()
 }
 
 /**
- * 初始化保存表格
- */
+* 初始化保存表格
+*/
 void ListAutoSort::setTableHeader()
 {
 	ui.tableWidget->setColumnCount(fields.size());
@@ -60,8 +60,8 @@ void ListAutoSort::setTableHeader()
 }
 
 /**
- * 在某一行，加上分析后的文本（添加/更新）
- */
+* 在某一行，加上分析后的文本（添加/更新）
+*/
 bool ListAutoSort::setTableARow(int row, QString mixture, QList<FieldItem>fields)
 {
 	QStringList result = analyzeMixture(mixture, fields);
@@ -91,8 +91,8 @@ bool ListAutoSort::setTableARow(int row, QString mixture, QList<FieldItem>fields
 }
 
 /**
- * AI识别的方法（调用 TableAITool）
- */
+* AI识别的方法（调用 TableAITool）
+*/
 QStringList ListAutoSort::analyzeMixture(QString mixture, QList<FieldItem> fields)
 {
 	TableAITool ai(mixture, fields);
@@ -101,10 +101,10 @@ QStringList ListAutoSort::analyzeMixture(QString mixture, QList<FieldItem> field
 }
 
 /**
- * 交换字段
- * * 列表上下移动
- * * 表格左右移动
- */
+* 交换字段
+* * 列表上下移动
+* * 表格左右移动
+*/
 void ListAutoSort::moveListItem(int from, int to)
 {
 	if (from == to)
@@ -114,14 +114,14 @@ void ListAutoSort::moveListItem(int from, int to)
 	fields.move(from, to);
 	writeFieldsInfo(); // 保存位置修改
 
-	// 移动 QListWidget
+					   // 移动 QListWidget
 	ui.fieldsList->insertItem(to, new QListWidgetItem(ui.fieldsList->item(from)->text()));
 	QListWidgetItem* item = ui.fieldsList->item(from + (from > to ? 1 : 0));
 	ui.fieldsList->takeItem(from + (from > to ? 1 : 0));
 	delete item;
 	ui.fieldsList->setCurrentRow(to); // 设置为原来的Item移动后的索引
 
-	// 移动 QTableWidget
+									  // 移动 QTableWidget
 	ui.tableWidget->insertColumn(to);
 	if (from > to) from++;
 	for (int i = 0; i < mixtures.size(); i++)
@@ -134,10 +134,10 @@ void ListAutoSort::moveListItem(int from, int to)
 }
 
 /**
- * 交换内容
- * * 表格上下移动
- * * Mixtures上下移动
- */
+* 交换内容
+* * 表格上下移动
+* * Mixtures上下移动
+*/
 void ListAutoSort::moveTableItem(int from, int to)
 {
 	if (from == to)
@@ -153,8 +153,8 @@ void ListAutoSort::moveTableItem(int from, int to)
 }
 
 /*
- * 从保存的文件中读取
- */
+* 从保存的文件中读取
+*/
 void ListAutoSort::writeFieldsInfo()
 {
 	QString content;
@@ -171,8 +171,8 @@ void ListAutoSort::writeFieldsInfo()
 }
 
 /**
- * 保存到文件之中
- */
+* 保存到文件之中
+*/
 void ListAutoSort::readFIeldsInfo()
 {
 	if (!isFileExist(savedPath))
@@ -192,8 +192,8 @@ void ListAutoSort::readFIeldsInfo()
 }
 
 /**
- * 做了更改之后刷新列表
- */
+* 做了更改之后刷新列表
+*/
 void ListAutoSort::refreshFieldsInfo()
 {
 	ui.fieldsList->clear();
@@ -206,8 +206,8 @@ void ListAutoSort::refreshFieldsInfo()
 }
 
 /**
- * TableVIew添加一列，后续可以编辑
- */
+* TableVIew添加一列，后续可以编辑
+*/
 void ListAutoSort::slotFieldItemAdd()
 {
 	// 创建字段列表
@@ -223,8 +223,8 @@ void ListAutoSort::slotFieldItemAdd()
 }
 
 /**
- * 添加 ui.inputEdit 中的内容到表格中
- */
+* 添加 ui.inputEdit 中的内容到表格中
+*/
 void ListAutoSort::slotInputButtonClicked()
 {
 	QString mixture = ui.inputEdit->toPlainText();
@@ -245,8 +245,8 @@ void ListAutoSort::slotInputButtonClicked()
 }
 
 /**
- * 插入 ui.inputEdit 中的内容到表格中
- */
+* 插入 ui.inputEdit 中的内容到表格中
+*/
 void ListAutoSort::slotInsertButtonClicked()
 {
 	int currentIndex = ui.tableWidget->currentRow();
@@ -271,8 +271,8 @@ void ListAutoSort::slotInsertButtonClicked()
 }
 
 /**
- * 直接添加剪贴板中的内容到表格中
- */
+* 直接添加剪贴板中的内容到表格中
+*/
 void ListAutoSort::slotPasteButtonClicked()
 {
 	const QClipboard* clipboard = QApplication::clipboard();
@@ -282,9 +282,9 @@ void ListAutoSort::slotPasteButtonClicked()
 }
 
 /**
- * 全部信息重新分类（丢弃所有的修改）
- * 在修改字段后适用
- */
+* 全部信息重新分类（丢弃所有的修改）
+* 在修改字段后适用
+*/
 void ListAutoSort::slotResortButtonClicked()
 {
 	if (ui.tableWidget->rowCount() == 0) return;
@@ -299,8 +299,8 @@ void ListAutoSort::slotResortButtonClicked()
 }
 
 /**
- * 复制表格的内容为Excel，换行+Tab
- */
+* 复制表格的内容为Excel，换行+Tab
+*/
 void ListAutoSort::slotExcelButtonClicked()
 {
 	// 复制内容
@@ -333,8 +333,8 @@ void ListAutoSort::slotExcelButtonClicked()
 }
 
 /**
- * 字段右键菜单
- */
+* 字段右键菜单
+*/
 void ListAutoSort::slotFieldItemMenu(QPoint p)
 {
 	QListWidgetItem* item = ui.fieldsList->itemAt(p);
@@ -377,8 +377,8 @@ void ListAutoSort::slotFieldItemRename()
 }
 
 /**
- * 删除字段
- */
+* 删除字段
+*/
 void ListAutoSort::slotFieldItemDelete()
 {
 	QListWidgetItem* item = ui.fieldsList->currentItem();
@@ -423,7 +423,7 @@ void ListAutoSort::slotFieldItemMoveDown()
 	if (index < 0 || index >= fields.size())
 		return;
 
-	if (index >= fields.size()-1)
+	if (index >= fields.size() - 1)
 		return;
 
 	moveListItem(index, index + 1);
@@ -453,7 +453,7 @@ void ListAutoSort::slotFieldItemMoveBottom()
 	if (index < 0 || index >= fields.size())
 		return;
 
-	if (index >= fields.size()-1)
+	if (index >= fields.size() - 1)
 		return;
 
 	moveListItem(index, fields.size() - 1);
@@ -465,8 +465,8 @@ void ListAutoSort::slotWorkSpaceActionTriggered()
 }
 
 /**
- * 字段列表位置改变
- */
+* 字段列表位置改变
+*/
 void ListAutoSort::slotFieldItemRowChanged()
 {
 	int index = ui.fieldsList->currentIndex().row();
@@ -477,8 +477,8 @@ void ListAutoSort::slotFieldItemRowChanged()
 }
 
 /**
- * 双击修改文本结束
- */
+* 双击修改文本结束
+*/
 void ListAutoSort::slotFieldItemTextModified(int row, QString text)
 {
 	if (row < 0 || row >= fields.size())
@@ -513,8 +513,8 @@ void ListAutoSort::slotFieldItemTextModified(int row, QString text)
 }
 
 /**
- * 修改正则表达式事件
- */
+* 修改正则表达式事件
+*/
 void ListAutoSort::slotFieldItemPatternModified(QString text)
 {
 	int index = ui.fieldsList->currentIndex().row();
@@ -525,8 +525,8 @@ void ListAutoSort::slotFieldItemPatternModified(QString text)
 }
 
 /**
- * 获取特定字段名的正则表达式
- */
+* 获取特定字段名的正则表达式
+*/
 QString ListAutoSort::getDefaultRegex(QString field)
 {
 	if (field == QStringLiteral("姓名"))

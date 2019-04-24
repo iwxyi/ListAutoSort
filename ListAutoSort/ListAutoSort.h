@@ -43,7 +43,7 @@ private:
 	void moveListItem(int from, int to);
 	void moveTableItem(int from, int to);
 
-public slots :
+	public slots :
 	void slotInputButtonClicked();
 	void slotInsertButtonClicked();
 	void slotPasteButtonClicked();
