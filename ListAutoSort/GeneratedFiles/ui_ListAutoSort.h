@@ -24,7 +24,6 @@
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTableWidget>
-#include <QtWidgets/QToolBar>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
@@ -64,14 +63,13 @@ public:
     QMenu *menu;
     QMenu *menu_2;
     QMenu *menu_3;
-    QToolBar *mainToolBar;
     QStatusBar *statusBar;
 
     void setupUi(QMainWindow *ListAutoSortClass)
     {
         if (ListAutoSortClass->objectName().isEmpty())
             ListAutoSortClass->setObjectName(QString::fromUtf8("ListAutoSortClass"));
-        ListAutoSortClass->resize(705, 509);
+        ListAutoSortClass->resize(669, 489);
         resortAction = new QAction(ListAutoSortClass);
         resortAction->setObjectName(QString::fromUtf8("resortAction"));
         helpAction = new QAction(ListAutoSortClass);
@@ -205,7 +203,7 @@ public:
         ListAutoSortClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(ListAutoSortClass);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 705, 23));
+        menuBar->setGeometry(QRect(0, 0, 669, 23));
         menu = new QMenu(menuBar);
         menu->setObjectName(QString::fromUtf8("menu"));
         menu_2 = new QMenu(menuBar);
@@ -213,9 +211,6 @@ public:
         menu_3 = new QMenu(menuBar);
         menu_3->setObjectName(QString::fromUtf8("menu_3"));
         ListAutoSortClass->setMenuBar(menuBar);
-        mainToolBar = new QToolBar(ListAutoSortClass);
-        mainToolBar->setObjectName(QString::fromUtf8("mainToolBar"));
-        ListAutoSortClass->addToolBar(Qt::TopToolBarArea, mainToolBar);
         statusBar = new QStatusBar(ListAutoSortClass);
         statusBar->setObjectName(QString::fromUtf8("statusBar"));
         ListAutoSortClass->setStatusBar(statusBar);
@@ -240,10 +235,22 @@ public:
         helpAction->setText(QApplication::translate("ListAutoSortClass", "\346\225\231\347\250\213", nullptr));
         aboutAction->setText(QApplication::translate("ListAutoSortClass", "\345\205\263\344\272\216", nullptr));
         workspaceAction->setText(QApplication::translate("ListAutoSortClass", "\345\267\245\344\275\234\347\233\256\345\275\225", nullptr));
+#ifndef QT_NO_TOOLTIP
+        addCol->setToolTip(QApplication::translate("ListAutoSortClass", "\346\267\273\345\212\240\344\270\200\345\210\227\343\200\202\346\267\273\345\212\240\345\220\216\357\274\214\345\273\272\350\256\256\345\257\271\345\267\262\346\234\211\346\225\260\346\215\256\351\207\215\346\226\260\345\210\206\346\213\243", nullptr));
+#endif // QT_NO_TOOLTIP
         addCol->setText(QApplication::translate("ListAutoSortClass", "\346\267\273\345\212\240\345\255\227\346\256\265", nullptr));
         inputButton->setText(QApplication::translate("ListAutoSortClass", "\346\267\273\345\212\240", nullptr));
+#ifndef QT_NO_TOOLTIP
+        insertButton->setToolTip(QApplication::translate("ListAutoSortClass", "\345\220\214\346\267\273\345\212\240\357\274\214\344\275\206\346\230\257\344\275\215\347\275\256\345\234\250\350\241\250\346\240\274\345\275\223\345\211\215\350\241\214\347\232\204\344\270\212\346\226\271", nullptr));
+#endif // QT_NO_TOOLTIP
         insertButton->setText(QApplication::translate("ListAutoSortClass", "\346\217\222\345\205\245", nullptr));
+#ifndef QT_NO_TOOLTIP
+        pasteButton->setToolTip(QApplication::translate("ListAutoSortClass", "\347\233\264\346\216\245\344\273\216\345\211\252\350\264\264\346\235\277\346\267\273\345\212\240\357\274\214\347\234\201\345\216\273\346\211\213\345\212\250\347\262\230\350\264\264\347\232\204\346\255\245\351\252\244", nullptr));
+#endif // QT_NO_TOOLTIP
         pasteButton->setText(QApplication::translate("ListAutoSortClass", "\350\257\206\345\210\253\345\211\252\350\264\264\346\235\277", nullptr));
+#ifndef QT_NO_TOOLTIP
+        resortButton->setToolTip(QApplication::translate("ListAutoSortClass", "\345\257\271\346\211\200\346\234\211\350\256\260\345\275\225\351\207\215\346\226\260\345\210\206\347\261\273\357\274\233\344\274\232\344\270\242\345\244\261\346\211\200\346\234\211\346\211\213\345\212\250\344\277\256\346\224\271\343\200\202\357\274\210\345\273\272\350\256\256\346\267\273\345\212\240\345\255\227\346\256\265\345\220\216\345\206\215\344\275\277\347\224\250\357\274\211", nullptr));
+#endif // QT_NO_TOOLTIP
         resortButton->setText(QApplication::translate("ListAutoSortClass", "\351\207\215\346\226\260\345\210\206\346\213\243", nullptr));
         copyExcelButton->setText(QApplication::translate("ListAutoSortClass", "\345\244\215\345\210\266\344\270\272Excel", nullptr));
         menu->setTitle(QApplication::translate("ListAutoSortClass", "\346\226\207\344\273\266", nullptr));
