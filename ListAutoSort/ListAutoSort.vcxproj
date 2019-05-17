@@ -130,7 +130,9 @@
     <QtUic Include="ListAutoSort.ui" />
   </ItemGroup>
   <ItemGroup>
-    <QtRcc Include="ListAutoSort.qrc" />
+    <QtRcc Include="ListAutoSort.qrc">
+      <SubType>Designer</SubType>
+    </QtRcc>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="F:\Cloud\Projects\ListAutoSort\ListAutoSort\Defines.h" />
@@ -157,7 +159,7 @@
   </ImportGroup>
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties MocDir=".\GeneratedFiles\$(ConfigurationName)" UicDir=".\GeneratedFiles" RccDir=".\GeneratedFiles" lupdateOptions="" lupdateOnBuild="0" lreleaseOptions="" Qt5Version_x0020_x64="5.12.3_64" MocOptions="" />
+      <UserProperties MocDir=".\GeneratedFiles\$(ConfigurationName)" UicDir=".\GeneratedFiles" RccDir=".\GeneratedFiles" lupdateOptions="" lupdateOnBuild="0" lreleaseOptions="" Qt5Version_x0020_x64="5.11.3_64" MocOptions="" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

@@ -5,14 +5,14 @@
     <QmlDebugSettings>file:$(ProjectGuid),block</QmlDebugSettings>
     <QmlDebug>-qmljsdebugger=$(QmlDebugSettings)</QmlDebug>
     <LocalDebuggerCommandArguments>$(QmlDebug)</LocalDebuggerCommandArguments>
-    <QTDIR>D:\IDE\Qt5.12.3\5.12.3\msvc2017_64</QTDIR>
+    <QTDIR>D:\IDE\Qt5.11.3\5.11.3\msvc2017_64</QTDIR>
     <LocalDebuggerEnvironment>PATH=$(QTDIR)\bin%3b$(PATH)</LocalDebuggerEnvironment>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <QmlDebugSettings>file:$(ProjectGuid),block</QmlDebugSettings>
     <QmlDebug>-qmljsdebugger=$(QmlDebugSettings)</QmlDebug>
     <LocalDebuggerCommandArguments>$(QmlDebug)</LocalDebuggerCommandArguments>
-    <QTDIR>D:\IDE\Qt5.12.3\5.12.3\msvc2017_64</QTDIR>
+    <QTDIR>D:\IDE\Qt5.11.3\5.11.3\msvc2017_64</QTDIR>
     <LocalDebuggerEnvironment>PATH=$(QTDIR)\bin%3b$(PATH)</LocalDebuggerEnvironment>
   </PropertyGroup>
 </Project>

@@ -536,7 +536,7 @@ QString ListAutoSort::getDefaultRegex(QString field)
 	if (field == QStringLiteral("年龄"))
 		return "^\\d{1,2}$";
 	if (field == QStringLiteral("班级"))
-		return "^[^\\x00-\\xff]{2,15}\\d{2,4}班级?$";
+		return "^[^\\x00-\\xff]{2,15}\\d{2,4}班?级?$";
 	if (field == QStringLiteral("手机") || field == QStringLiteral("手机号"))
 		return "^1\\d{10}$";
 	if (field == QStringLiteral("邮箱"))

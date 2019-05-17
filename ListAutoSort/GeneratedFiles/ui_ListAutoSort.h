@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'ListAutoSort.ui'
 **
-** Created by: Qt User Interface Compiler version 5.12.3
+** Created by: Qt User Interface Compiler version 5.11.3
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -68,43 +68,43 @@ public:
     void setupUi(QMainWindow *ListAutoSortClass)
     {
         if (ListAutoSortClass->objectName().isEmpty())
-            ListAutoSortClass->setObjectName(QString::fromUtf8("ListAutoSortClass"));
-        ListAutoSortClass->resize(669, 489);
+            ListAutoSortClass->setObjectName(QStringLiteral("ListAutoSortClass"));
+        ListAutoSortClass->resize(660, 489);
         resortAction = new QAction(ListAutoSortClass);
-        resortAction->setObjectName(QString::fromUtf8("resortAction"));
+        resortAction->setObjectName(QStringLiteral("resortAction"));
         helpAction = new QAction(ListAutoSortClass);
-        helpAction->setObjectName(QString::fromUtf8("helpAction"));
+        helpAction->setObjectName(QStringLiteral("helpAction"));
         aboutAction = new QAction(ListAutoSortClass);
-        aboutAction->setObjectName(QString::fromUtf8("aboutAction"));
+        aboutAction->setObjectName(QStringLiteral("aboutAction"));
         workspaceAction = new QAction(ListAutoSortClass);
-        workspaceAction->setObjectName(QString::fromUtf8("workspaceAction"));
+        workspaceAction->setObjectName(QStringLiteral("workspaceAction"));
         centralWidget = new QWidget(ListAutoSortClass);
-        centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
+        centralWidget->setObjectName(QStringLiteral("centralWidget"));
         horizontalLayout_2 = new QHBoxLayout(centralWidget);
         horizontalLayout_2->setSpacing(6);
         horizontalLayout_2->setContentsMargins(11, 11, 11, 11);
-        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
+        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setSpacing(6);
-        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         inputVLayout = new QVBoxLayout();
         inputVLayout->setSpacing(6);
-        inputVLayout->setObjectName(QString::fromUtf8("inputVLayout"));
+        inputVLayout->setObjectName(QStringLiteral("inputVLayout"));
         inputVLayout->setSizeConstraint(QLayout::SetDefaultConstraint);
         fieldsList = new QListWidget(centralWidget);
-        fieldsList->setObjectName(QString::fromUtf8("fieldsList"));
+        fieldsList->setObjectName(QStringLiteral("fieldsList"));
         fieldsList->setContextMenuPolicy(Qt::CustomContextMenu);
 
         inputVLayout->addWidget(fieldsList);
 
         patternEdit = new QLineEdit(centralWidget);
-        patternEdit->setObjectName(QString::fromUtf8("patternEdit"));
+        patternEdit->setObjectName(QStringLiteral("patternEdit"));
 
         inputVLayout->addWidget(patternEdit);
 
         horizontalLayout_4 = new QHBoxLayout();
         horizontalLayout_4->setSpacing(6);
-        horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
+        horizontalLayout_4->setObjectName(QStringLiteral("horizontalLayout_4"));
         horizontalLayout_4->setSizeConstraint(QLayout::SetMinimumSize);
         horizontalLayout_4->setContentsMargins(-1, 0, -1, -1);
         horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
@@ -112,7 +112,7 @@ public:
         horizontalLayout_4->addItem(horizontalSpacer);
 
         addCol = new QPushButton(centralWidget);
-        addCol->setObjectName(QString::fromUtf8("addCol"));
+        addCol->setObjectName(QStringLiteral("addCol"));
 
         horizontalLayout_4->addWidget(addCol);
 
@@ -120,13 +120,13 @@ public:
         inputVLayout->addLayout(horizontalLayout_4);
 
         inputEdit = new QPlainTextEdit(centralWidget);
-        inputEdit->setObjectName(QString::fromUtf8("inputEdit"));
+        inputEdit->setObjectName(QStringLiteral("inputEdit"));
 
         inputVLayout->addWidget(inputEdit);
 
         horizontalLayout_3 = new QHBoxLayout();
         horizontalLayout_3->setSpacing(6);
-        horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
+        horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
         horizontalLayout_3->setSizeConstraint(QLayout::SetMinimumSize);
         horizontalLayout_3->setContentsMargins(-1, 0, -1, -1);
         horizontalSpacer_3 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
@@ -134,12 +134,12 @@ public:
         horizontalLayout_3->addItem(horizontalSpacer_3);
 
         inputButton = new QPushButton(centralWidget);
-        inputButton->setObjectName(QString::fromUtf8("inputButton"));
+        inputButton->setObjectName(QStringLiteral("inputButton"));
 
         horizontalLayout_3->addWidget(inputButton);
 
         insertButton = new QPushButton(centralWidget);
-        insertButton->setObjectName(QString::fromUtf8("insertButton"));
+        insertButton->setObjectName(QStringLiteral("insertButton"));
 
         horizontalLayout_3->addWidget(insertButton);
 
@@ -148,7 +148,7 @@ public:
         horizontalLayout_3->addItem(horizontalSpacer_2);
 
         pasteButton = new QPushButton(centralWidget);
-        pasteButton->setObjectName(QString::fromUtf8("pasteButton"));
+        pasteButton->setObjectName(QStringLiteral("pasteButton"));
 
         horizontalLayout_3->addWidget(pasteButton);
 
@@ -164,19 +164,19 @@ public:
 
         verticalLayout = new QVBoxLayout();
         verticalLayout->setSpacing(6);
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         verticalLayout->setContentsMargins(-1, -1, 0, -1);
         tableWidget = new QTableWidget(centralWidget);
-        tableWidget->setObjectName(QString::fromUtf8("tableWidget"));
+        tableWidget->setObjectName(QStringLiteral("tableWidget"));
 
         verticalLayout->addWidget(tableWidget);
 
         horizontalLayout_5 = new QHBoxLayout();
         horizontalLayout_5->setSpacing(6);
-        horizontalLayout_5->setObjectName(QString::fromUtf8("horizontalLayout_5"));
+        horizontalLayout_5->setObjectName(QStringLiteral("horizontalLayout_5"));
         horizontalLayout_5->setContentsMargins(-1, 0, -1, -1);
         resortButton = new QPushButton(centralWidget);
-        resortButton->setObjectName(QString::fromUtf8("resortButton"));
+        resortButton->setObjectName(QStringLiteral("resortButton"));
 
         horizontalLayout_5->addWidget(resortButton);
 
@@ -185,7 +185,7 @@ public:
         horizontalLayout_5->addItem(horizontalSpacer_5);
 
         copyExcelButton = new QPushButton(centralWidget);
-        copyExcelButton->setObjectName(QString::fromUtf8("copyExcelButton"));
+        copyExcelButton->setObjectName(QStringLiteral("copyExcelButton"));
 
         horizontalLayout_5->addWidget(copyExcelButton);
 
@@ -202,17 +202,17 @@ public:
 
         ListAutoSortClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(ListAutoSortClass);
-        menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 669, 23));
+        menuBar->setObjectName(QStringLiteral("menuBar"));
+        menuBar->setGeometry(QRect(0, 0, 660, 23));
         menu = new QMenu(menuBar);
-        menu->setObjectName(QString::fromUtf8("menu"));
+        menu->setObjectName(QStringLiteral("menu"));
         menu_2 = new QMenu(menuBar);
-        menu_2->setObjectName(QString::fromUtf8("menu_2"));
+        menu_2->setObjectName(QStringLiteral("menu_2"));
         menu_3 = new QMenu(menuBar);
-        menu_3->setObjectName(QString::fromUtf8("menu_3"));
+        menu_3->setObjectName(QStringLiteral("menu_3"));
         ListAutoSortClass->setMenuBar(menuBar);
         statusBar = new QStatusBar(ListAutoSortClass);
-        statusBar->setObjectName(QString::fromUtf8("statusBar"));
+        statusBar->setObjectName(QStringLiteral("statusBar"));
         ListAutoSortClass->setStatusBar(statusBar);
 
         menuBar->addAction(menu->menuAction());
