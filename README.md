@@ -30,7 +30,7 @@ xiaohong@gmail.com
 
 都是可以正常识别的，结果如下：
 
-![1558085930735](README.assets/1558085930735.png)
+![运行截图](picture/运行截图.png)
 
 然后可以导出到Excel，用Excel的功能进行统计，万事大吉，跑去休息休息！
 
